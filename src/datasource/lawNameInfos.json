@@ -1,0 +1,144 @@
+{
+    "Shihoshoshi": [
+        {
+            "lawId": "321CONSTITUTION",
+            "lawName": "日本国憲法",
+            "lawNo": "昭和二十一年憲法",
+            "promulgationDate": "19461103"
+        },
+        {
+            "lawId": "129AC0000000089",
+            "lawName": "民法",
+            "lawNo": "明治二十九年法律第八十九号",
+            "promulgationDate": "18960427"
+        },
+        {
+            "lawId": "416AC0000000123",
+            "lawName": "不動産登記法",
+            "lawNo": "平成十六年法律第百二十三号",
+            "promulgationDate": "20040618"
+        },
+        {
+            "lawId": "417AC0000000086",
+            "lawName": "会社法",
+            "lawNo": "平成十七年法律第八十六号",
+            "promulgationDate": "20050726"
+        },
+        {
+            "lawId": "338AC0000000125",
+            "lawName": "商業登記法",
+            "lawNo": "昭和三十八年法律第百二十五号",
+            "promulgationDate": "19630709"
+        },
+        {
+            "lawId": "140AC0000000045",
+            "lawName": "刑法",
+            "lawNo": "明治四十年法律第四十五号",
+            "promulgationDate": "19070424"
+        },
+        {
+            "lawId": "132AC0000000015",
+            "lawName": "供託法",
+            "lawNo": "明治三十二年法律第十五号",
+            "promulgationDate": "18990208"
+        },
+        {
+            "lawId": "325AC1000000197",
+            "lawName": "司法書士法",
+            "lawNo": "昭和二十五年法律第百九十七号",
+            "promulgationDate": "19500522"
+        },
+        {
+            "lawId": "408AC0000000109",
+            "lawName": "民事訴訟法",
+            "lawNo": "平成八年法律第百九号",
+            "promulgationDate": "19960626"
+        },
+        {
+            "lawId": "354AC0000000004",
+            "lawName": "民事執行法",
+            "lawNo": "昭和五十四年法律第四号",
+            "promulgationDate": "19790330"
+        },
+        {
+            "lawId": "401AC0000000091",
+            "lawName": "民事保全法",
+            "lawNo": "平成元年法律第九十一号",
+            "promulgationDate": "19891222"
+        }
+    ],
+    "Gyoseishoshi": [
+        {
+            "lawId": "321CONSTITUTION",
+            "lawName": "日本国憲法",
+            "lawNo": "昭和二十一年憲法",
+            "promulgationDate": "19461103"
+        },
+        {
+            "lawId": "129AC0000000089",
+            "lawName": "民法",
+            "lawNo": "明治二十九年法律第八十九号",
+            "promulgationDate": "18960427"
+        },
+        {
+            "lawId": "417AC0000000086",
+            "lawName": "会社法",
+            "lawNo": "平成十七年法律第八十六号",
+            "promulgationDate": "20050726"
+        },
+        {
+            "lawId": "405AC0000000088",
+            "lawName": "行政手続法",
+            "lawNo": "平成五年法律第八十八号",
+            "promulgationDate": "19931112"
+        },
+        {
+            "lawId": "426AC0000000068",
+            "lawName": "行政不服審査法",
+            "lawNo": "平成二十六年法律第六十八号",
+            "promulgationDate": "20140613"
+        },
+        {
+            "lawId": "337AC0000000139",
+            "lawName": "行政事件訴訟法",
+            "lawNo": "昭和三十七年法律第百三十九号",
+            "promulgationDate": "19620516"
+        },
+        {
+            "lawId": "322AC0000000125",
+            "lawName": "国家賠償法",
+            "lawNo": "昭和二十二年法律第百二十五号",
+            "promulgationDate": "19471027"
+        },
+        {
+            "lawId": "322AC0000000067",
+            "lawName": "地方自治法",
+            "lawNo": "昭和二十二年法律第六十七号",
+            "promulgationDate": "19470417"
+        },
+        {
+            "lawId": "322AC1000000079",
+            "lawName": "国会法",
+            "lawNo": "昭和二十二年法律第七十九号",
+            "promulgationDate": "19470430"
+        },
+        {
+            "lawId": "322AC0000000005",
+            "lawName": "内閣法",
+            "lawNo": "昭和二十二年法律第五号",
+            "promulgationDate": "19470116"
+        },
+        {
+            "lawId": "323AC0000000120",
+            "lawName": "国家行政組織法",
+            "lawNo": "昭和二十三年法律第百二十号",
+            "promulgationDate": "19480710"
+        },
+        {
+            "lawId": "322AC0000000120",
+            "lawName": "国家公務員法",
+            "lawNo": "昭和二十二年法律第百二十号",
+            "promulgationDate": "19471021"
+        }
+    ]
+}
