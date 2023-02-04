@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import InfiniteScroll from "react-infinite-scroller";
 import { useState } from "react";
 import React from "react";
+import Items from "./Items";
 
 const Articles = (props: any) => {
   // const [list, setList] = useState<any>([]); //表示するデータ
@@ -43,23 +44,15 @@ const Articles = (props: any) => {
           {`第${props.article.number}条`}
         </Typography>
         <Typography component="div">
-          {props.article.paragraphs.map((pg: any) => {
-            return pg.sentence;
+          {props.article.paragraphs.map((paragraph: any, index: number) => {
+            return (
+              <React.Fragment key={index}>
+                {`第${index + 1}項:  `}
+                {paragraph.sentence}
+                <Items items={paragraph.items} />
+              </React.Fragment>
+            );
           })}
-        </Typography>
-        <Typography component="div">
-          {props.article.paragraphs[0].items
-            .map((item: any, index: any) => {
-              return (index + 1).toString() + " " + item;
-            })
-            .map((item: any, index: any) => {
-              return (
-                <React.Fragment key={index}>
-                  {item}
-                  <br />
-                </React.Fragment>
-              );
-            })}
         </Typography>
       </CardContent>
       <CardActions>
