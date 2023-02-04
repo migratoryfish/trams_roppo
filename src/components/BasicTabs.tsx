@@ -89,8 +89,26 @@ const BasicTabs: FC<Props> = ({ keyword, children }) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         {extArticle.lawDataArticles.flatMap((article) =>
-          article.paragraphs.every((paragraph) =>
-            paragraph.sentence.includes(keyword)
+          article.paragraphs.some(
+            (paragraph) =>
+              //!keyword ? true : paragraph.sentence.search(`/${keyword}/g`)
+              //someではなく処理速度的にfindのほうがよいか?
+              //ToDo:要検討
+              {
+                if (!keyword) {
+                  console.log("keywordは空文字です");
+                  return true;
+                } else if (paragraph.sentence.indexOf(keyword) !== -1) {
+                  console.log("paragraph.sentence: " + paragraph.sentence);
+                  console.log(keyword + " :keywordはヒットしました!!: ");
+                  return true;
+                } else {
+                  console.log("paragraph.sentence: " + paragraph.sentence);
+                  console.log(keyword + "keywordがヒットしませんでした");
+                  return false;
+                }
+              }
+            // paragraph.sentence.indexOf(keyword)
           ) ? (
             <Articles article={article} />
           ) : (
