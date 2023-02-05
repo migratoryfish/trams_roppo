@@ -256,12 +256,6 @@ export default function PersistentDrawerLeft() {
       <Main open={open}>
         <DrawerHeader />
         <BasicTabs keyword={keyword} />
-        <Typography paragraph>
-          ここに法令がたくさん表示されますように
-        </Typography>
-        <Typography paragraph>
-          なんでCSSはこんなにも複雑なのか？ボブは訝しんだ
-        </Typography>
       </Main>
     </Box>
   );

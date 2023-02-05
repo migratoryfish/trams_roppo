@@ -63,7 +63,7 @@ const ArticlesInfo = (props: any) => {
         loader={loader} // ローディング中のコンポーネント
       >
         {list.map((article) => {
-          return <Article article={article} />;
+          return <Article article={article} keyword={props.keyword} />;
         })}
       </InfiniteScroll>
     </Box>
