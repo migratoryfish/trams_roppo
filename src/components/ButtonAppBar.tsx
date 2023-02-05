@@ -26,6 +26,7 @@ import {
 } from "@mui/icons-material";
 import BasicTabs from "./BasicTabs";
 import InputBase from "@mui/material/InputBase";
+import { useRef } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -124,9 +125,18 @@ export default function PersistentDrawerLeft() {
   const [open, setOpen] = React.useState(false);
   // 入力キーワード
   const [keyword, setKeyword] = React.useState("");
+  // 現在 IME ON（変換中）かどうかのフラグ
+  const isImeOn = useRef(false);
 
   const handleSearchInput = (value: string) => {
     console.log("検索ボックスの値が変化しました");
+    if (keyword === value) return;
+    if (value === "") {
+      // Chrome ではテキストクリア時に onCompositionEnd が呼ばれないことがある
+      isImeOn.current = false;
+    } else if (isImeOn.current) {
+      return; // IME 変換中は何もしない
+    }
     setKeyword(value);
   };
 
@@ -163,6 +173,15 @@ export default function PersistentDrawerLeft() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               onChange={(event) => handleSearchInput(event.target.value)}
+              onCompositionStart={() => {
+                console.log("IME ON!!　で漢字入力開始です");
+              }}
+              onCompositionUpdate={() => {
+                console.log("IME ON中で入力中…");
+              }}
+              onCompositionEnd={() => {
+                console.log("IME END!! 漢字変換が終了しました");
+              }}
             />
           </Search>
         </Toolbar>

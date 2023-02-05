@@ -18,15 +18,15 @@ const ArticlesInfo = (props: any) => {
         //ToDo:要検討
         {
           if (!props.keyword) {
-            console.log("keywordは空文字です");
+            // console.log("keywordは空文字です");
             return true;
           } else if (paragraph.sentence.indexOf(props.keyword) !== -1) {
-            console.log("paragraph.sentence: " + paragraph.sentence);
-            console.log(props.keyword + " :keywordはヒットしました!!: ");
+            // console.log("paragraph.sentence: " + paragraph.sentence);
+            // console.log(props.keyword + " :keywordはヒットしました!!: ");
             return true;
           } else {
-            console.log("paragraph.sentence: " + paragraph.sentence);
-            console.log(props.keyword + "keywordがヒットしませんでした");
+            // console.log("paragraph.sentence: " + paragraph.sentence);
+            // console.log(props.keyword + "keywordがヒットしませんでした");
             return false;
           }
         }
@@ -35,9 +35,13 @@ const ArticlesInfo = (props: any) => {
       ? article
       : []
   );
+
   const original = useRef(data);
-  const [list, setList] = useState<any[]>([...original.current.slice(0, 5)]);
-  //original.current.splice(0, 5); ここに書くとダメ
+
+  //5未満の条文数だと無限スクロールに不具合発生
+  //ToDo
+  const [list, setList] = useState<any[]>(original.current.slice(0, 5));
+  //original.current.splice(0, 3); ここに書くとダメ
 
   const fetchMoreData = () => {
     if (original.current.length >= 5) {
