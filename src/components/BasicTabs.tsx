@@ -11,6 +11,7 @@ import { toDate } from "../util/util";
 import Article from "./Article";
 import extArticleData from "../datasource/minpoArticle.json";
 import ArticlesInfo from "./ArticlesInfo";
+import { width } from "@mui/system";
 
 type Props = {
   //color: string;
@@ -62,7 +63,7 @@ const BasicTabs: FC<Props> = ({ keyword, children }) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100vw" }}>
         <Tabs
           value={value}
           onChange={handleChange}
