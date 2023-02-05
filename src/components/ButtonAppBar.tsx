@@ -172,14 +172,17 @@ export default function PersistentDrawerLeft() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-              onChange={(event) => handleSearchInput(event.target.value)}
+              // onChange={(event) => handleSearchInput(event.target.value)}
               onCompositionStart={() => {
+                isImeOn.current = true; // IME 入力中フラグを ON
                 console.log("IME ON!!　で漢字入力開始です");
               }}
               onCompositionUpdate={() => {
                 console.log("IME ON中で入力中…");
               }}
               onCompositionEnd={() => {
+                isImeOn.current = false; // IME 入力中フラグを OFF
+                handleSearchInput((event?.target as HTMLInputElement).value); //入力が確定したとき
                 console.log("IME END!! 漢字変換が終了しました");
               }}
             />
