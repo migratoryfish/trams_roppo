@@ -8,9 +8,9 @@ import { Shihoshoshi, Gyoseishoshi } from "../datasource/lawNameInfos.json";
 import { FC, ReactNode } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { toDate } from "../util/util";
-import Articles from "./Articles";
-import Article from "../datasource/sampleArticle.json";
-import extArticle from "../datasource/minpoArticle.json";
+import Article from "./Article";
+import extArticleData from "../datasource/minpoArticle.json";
+import ArticlesInfo from "./ArticlesInfo";
 
 type Props = {
   //color: string;
@@ -88,33 +88,7 @@ const BasicTabs: FC<Props> = ({ keyword, children }) => {
         憲法: サンプルの文字列です
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {extArticle.lawDataArticles.flatMap((article) =>
-          article.paragraphs.some(
-            (paragraph) =>
-              //!keyword ? true : paragraph.sentence.search(`/${keyword}/g`)
-              //someではなく処理速度的にfindのほうがよいか?
-              //ToDo:要検討
-              {
-                if (!keyword) {
-                  console.log("keywordは空文字です");
-                  return true;
-                } else if (paragraph.sentence.indexOf(keyword) !== -1) {
-                  console.log("paragraph.sentence: " + paragraph.sentence);
-                  console.log(keyword + " :keywordはヒットしました!!: ");
-                  return true;
-                } else {
-                  console.log("paragraph.sentence: " + paragraph.sentence);
-                  console.log(keyword + "keywordがヒットしませんでした");
-                  return false;
-                }
-              }
-            // paragraph.sentence.indexOf(keyword)
-          ) ? (
-            <Articles article={article} />
-          ) : (
-            []
-          )
-        )}
+        <ArticlesInfo keyword={keyword} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         不動産登記: サンプルの文字列です
