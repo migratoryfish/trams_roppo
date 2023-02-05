@@ -1,5 +1,6 @@
 import Typography from "@mui/material/Typography";
 import React from "react";
+import Highlighter from "react-highlight-words";
 
 const Paragraph = (props: any) => {
   //
@@ -19,7 +20,13 @@ const Paragraph = (props: any) => {
         .map((item: any, index: number) => {
           return (
             <React.Fragment key={index}>
-              {item}
+              <Highlighter
+                highlightClassName="YourHighlightClass2"
+                searchWords={[props.keyword]}
+                autoEscape={true}
+                textToHighlight={item}
+              />
+
               <br />
             </React.Fragment>
           );

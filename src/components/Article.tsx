@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import Items from "./Items";
 
+import Highlighter from "react-highlight-words";
+
 const Article = (props: any) => {
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -21,8 +23,13 @@ const Article = (props: any) => {
             return (
               <React.Fragment key={index}>
                 {`第${index + 1}項:  `}
-                {paragraph.sentence}
-                <Items items={paragraph.items} />
+                <Highlighter
+                  highlightClassName="YourHighlightClass"
+                  searchWords={[props.keyword]}
+                  autoEscape={true}
+                  textToHighlight={paragraph.sentence}
+                />
+                <Items items={paragraph.items} keyword={props.keyword} />
               </React.Fragment>
             );
           })}
