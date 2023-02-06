@@ -49,17 +49,17 @@ function a11yProps(index: number) {
 }
 
 const LawTabs: FC<Props> = ({ keyword, children }) => {
-  const [value, setValue] = React.useState(0);
+  const [selectedTabValue, setSelectedTabValu] = React.useState(1);
   const shihoshoshi = Shihoshoshi;
   const gyoseishoshi = Gyoseishoshi;
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setSelectedTabValu(newValue);
   };
 
   return (
     <Box sx={{ width: "100vw", typography: "body1" }}>
-      <TabContext value={value.toString()}>
+      <TabContext value={selectedTabValue.toString()}>
         <Box
           sx={{
             borderBottom: 1,
