@@ -1,11 +1,9 @@
-import BasicTabs from "./components/BasicTabs";
-import ButtonAppBar from "./components/ButtonAppBar";
-import FullWidthGrid from "./components/FullWidthGrid";
+import MainArea from "./components/MainArea";
 
 function App() {
   return (
     <>
-      <ButtonAppBar />
+      <MainArea />
     </>
   );
 }

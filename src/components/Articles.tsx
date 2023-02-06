@@ -2,14 +2,30 @@ import Box from "@mui/material/Box";
 import React, { useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Article from "./Article";
-import extArticleData from "../datasource/minpoArticle.json";
+import minpoArticleData from "../datasource/minpoArticle.json";
 
-//サンプル用コンポーネント(これがたくさん出る)
-const Card = () => {
-  return <div>カードです</div>;
-};
+import kenpoArticleData from "../datasource/kenpo.json";
+import kaisyahoArticleData from "../datasource/kaisyaho.json";
+import hudosantoukihoArticleData from "../datasource/hudosantoukiho.json";
+import syogyotoukihoArticleData from "../datasource/syogyotoukiho.json";
 
-const ArticlesInfo = (props: any) => {
+const Articles = (props: any) => {
+  const ID = props.targetArticlesID;
+  let extArticleData;
+  if (ID === "129AC0000000089") {
+    extArticleData = minpoArticleData;
+  } else if (ID === "321CONSTITUTION") {
+    extArticleData = kenpoArticleData;
+  } else if (ID === "416AC0000000123") {
+    extArticleData = hudosantoukihoArticleData;
+  } else if (ID === "417AC0000000086") {
+    extArticleData = kaisyahoArticleData;
+  } else if (ID === "338AC0000000125") {
+    extArticleData = syogyotoukihoArticleData;
+  } else {
+    extArticleData = kenpoArticleData;
+  }
+
   let data = extArticleData.lawDataArticles.flatMap((article) =>
     article.paragraphs.some(
       (paragraph) =>
@@ -70,4 +86,4 @@ const ArticlesInfo = (props: any) => {
   );
 };
 
-export default ArticlesInfo;
+export default Articles;
