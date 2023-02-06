@@ -62,8 +62,16 @@ const BasicTabs: FC<Props> = ({ keyword, children }) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100vw" }}>
+    <Box sx={{ width: "100vw" }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          width: "100vw",
+          position: "fixed",
+          backgroundColor: "white",
+        }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -85,6 +93,8 @@ const BasicTabs: FC<Props> = ({ keyword, children }) => {
           <Tab label="司法書士法" {...a11yProps(10)} />
         </Tabs>
       </Box>
+      <br />
+
       <TabPanel value={value} index={0}>
         憲法: サンプルの文字列です
       </TabPanel>
