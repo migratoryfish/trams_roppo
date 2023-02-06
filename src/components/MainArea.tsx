@@ -24,7 +24,7 @@ import {
   Warning,
   Lens,
 } from "@mui/icons-material";
-import BasicTabs from "./BasicTabs";
+import LawTabs from "./LawTabs";
 import InputBase from "@mui/material/InputBase";
 import { useRef } from "react";
 
@@ -120,7 +120,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+export default function MainArea() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   // 入力キーワード
@@ -170,7 +170,7 @@ export default function PersistentDrawerLeft() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="条文横断検索"
               inputProps={{ "aria-label": "search" }}
               // onChange={(event) => handleSearchInput(event.target.value)}
               onCompositionStart={() => {
@@ -214,14 +214,14 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           {[
-            "司法試験",
-            "公認会計士",
-            "司法書士",
-            "行政書士",
-            "土地家屋調査士",
-            "弁理士",
-            "社会保険労務士",
-            "税理士",
+            "すごい機能",
+            "とんでもない機能",
+            "目が覚める機能",
+            "素晴らしい機能",
+            "唯一無二な機能",
+            "地味だけど良い機能",
+            "渋い機能",
+            "おいしい機能",
           ].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
@@ -255,7 +255,7 @@ export default function PersistentDrawerLeft() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <BasicTabs keyword={keyword} />
+        <LawTabs keyword={keyword} />
       </Main>
     </Box>
   );

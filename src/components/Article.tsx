@@ -35,9 +35,7 @@ const Article = (props: any) => {
           })}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">関連条文参照</Button>
-      </CardActions>
+      <CardActions>関連条文参照</CardActions>
     </Card>
   );
 };
