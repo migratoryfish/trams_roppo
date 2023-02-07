@@ -26,7 +26,14 @@ import {
 } from "@mui/icons-material";
 import LawTabs from "./LawTabs";
 import InputBase from "@mui/material/InputBase";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -122,6 +129,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function MainArea() {
   const theme = useTheme();
+
+  //select(プルダウン)用テストコードS
+  const [professionExam, setProfessionExam] = useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setProfessionExam(event.target.value);
+  };
+  //select(プルダウン)用テストコードE
+
   const [open, setOpen] = React.useState(false);
   // 入力キーワード
   const [keyword, setKeyword] = React.useState("");
@@ -187,6 +203,23 @@ export default function MainArea() {
               }}
             />
           </Search>
+
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">対象試験</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={professionExam}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={0}>司法試験</MenuItem>
+                <MenuItem value={1}>司法書士試験</MenuItem>
+                <MenuItem value={2}>行政書士試験</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -255,7 +288,7 @@ export default function MainArea() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <LawTabs keyword={keyword} />
+        <LawTabs keyword={keyword} professionExam={professionExam} />
       </Main>
     </Box>
   );
