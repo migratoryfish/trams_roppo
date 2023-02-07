@@ -56,7 +56,11 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
           backgroundColor: "azure",
         }}
       >
-        <SearchBox placeholder={"条文検索"} sendKeyword={sendKeyword} />
+        <SearchBox
+          placeholder={"条文検索"}
+          sendKeyword={sendKeyword}
+          keyword={keyword}
+        />
       </Box>
       <br />
       <br />
