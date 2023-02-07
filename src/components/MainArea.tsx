@@ -129,7 +129,7 @@ export default function MainArea() {
   const isImeOn = useRef(false);
 
   const handleSearchInput = (value: string) => {
-    console.log("検索ボックスの値が変化しました");
+    console.log("条文横断検索　検索ボックスの値が変化しました");
     if (keyword === value) return;
     if (value === "") {
       // Chrome ではテキストクリア時に onCompositionEnd が呼ばれないことがある
@@ -175,15 +175,15 @@ export default function MainArea() {
               // onChange={(event) => handleSearchInput(event.target.value)}
               onCompositionStart={() => {
                 isImeOn.current = true; // IME 入力中フラグを ON
-                console.log("IME ON!!　で漢字入力開始です");
+                console.log("条文横断検索　IME ON!!　で漢字入力開始です");
               }}
               onCompositionUpdate={() => {
-                console.log("IME ON中で入力中…");
+                console.log("条文横断検索　IME ON中で入力中…");
               }}
               onCompositionEnd={() => {
                 isImeOn.current = false; // IME 入力中フラグを OFF
                 handleSearchInput((event?.target as HTMLInputElement).value); //入力が確定したとき
-                console.log("IME END!! 漢字変換が終了しました");
+                console.log("条文横断検索　IME END!! 漢字変換が終了しました");
               }}
             />
           </Search>
