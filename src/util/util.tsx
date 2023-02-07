@@ -5,6 +5,8 @@ import kaisyahoArticleData from "../datasource/kaisyaho.json";
 import hudosantoukihoArticleData from "../datasource/hudosantoukiho.json";
 import syogyotoukihoArticleData from "../datasource/syogyotoukiho.json";
 
+import examList from "../datasource/lawNameInfos.json";
+
 // str: 日付文字列（yyyyMMdd）
 export function toDate(str: string): string {
   const retDate =
@@ -34,4 +36,20 @@ export const getLawCode = (lawId: string) => {
   }
 
   return extArticleData;
+};
+
+export const getExamList = (profession: string) => {
+  switch (profession) {
+    case "0":
+      break;
+    case "1":
+      return examList.Shihoshoshi;
+      break;
+    case "2":
+      return examList.Gyoseishoshi;
+      break;
+    default:
+      console.log("想定外な士業試験です:professionNumber: " + profession);
+      break;
+  }
 };
