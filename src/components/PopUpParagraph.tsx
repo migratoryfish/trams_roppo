@@ -52,7 +52,7 @@ const PopUpParagraph = (props: any) => {
       <div>
         {obj.map((pg, index, obj) => {
           return (
-            <div>
+            <>
               {pg.leftContext}
               <Tooltip
                 title={
@@ -72,8 +72,8 @@ const PopUpParagraph = (props: any) => {
                   {pg.lastMatch}
                 </div>
               </Tooltip>
-              {index === obj.length - 1 ? rightContext : "■"}
-            </div>
+              {index === obj.length - 1 ? rightContext : ""}
+            </>
           );
         })}
       </div>
