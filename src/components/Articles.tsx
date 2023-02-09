@@ -8,30 +8,31 @@ const Articles = (props: any) => {
   const original = useRef(props.articles);
 
   //5未満の条文数だと無限スクロールに不具合発生
-  //ToDo
+  //TODO:
   // const [list, setList] = useState<any[]>([...original.current].slice(0, 5));
   const [list, setList] = useState<any[]>(
-    props.articles.length <= 4
+    props.articles.length < 10
       ? [...props.articles]
-      : props.articles.slice(0, 5)
+      : props.articles.slice(0, 10)
   );
   //original.current.splice(0, 3); ここに書くとダメ
 
   //暫定措置 keyをコンポーネントに渡すと解消するらしいが…現時点で不可
   //初期stateが初期化されない問題への対処
+  //TODO:ここにもprops.articlesが10未満の場合のコード必要
   useEffect(() => {
-    setList([...props.articles].slice(0, 5));
+    setList([...props.articles].slice(0, 10));
   }, [props.keyword]);
 
   const fetchMoreData = () => {
-    if (original.current.length >= 5) {
-      original.current.splice(0, 5);
+    if (original.current.length >= 10) {
+      original.current.splice(0, 10);
     } else if (original.current.length > 0) {
       original.current.splice(0, original.current.length);
     }
 
-    if (original.current.length >= 5) {
-      setList([...list, ...original.current.slice(0, 5)]);
+    if (original.current.length >= 10) {
+      setList([...list, ...original.current.slice(0, 10)]);
     } else if (original.current.length > 0) {
       setList([...list, ...original.current]);
     }
