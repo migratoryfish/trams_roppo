@@ -12,7 +12,7 @@ const Paragraph = (props: any) => {
   //
 
   return (
-    <Typography component="div">
+    <Typography component="div" paddingLeft={6}>
       {props.items
         .map((item: any, index: number) => {
           return (index + 1).toString() + " " + item;
