@@ -9,33 +9,36 @@ import React, { useState } from "react";
 import Items from "./Items";
 
 import Highlighter from "react-highlight-words";
-import { Box, ButtonBase } from "@mui/material";
+import { Box, ButtonBase, Divider, Paper } from "@mui/material";
 import PopUp from "./PopUp";
 import { color } from "@mui/system";
 
 const Article = (props: any) => {
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Paper>
+      <Divider />
       {/* 読み込み最中に表示する項目 */}
-      <CardContent>
-        <Typography sx={{ fontSize: 18 }} color="text.primary" gutterBottom>
-          {/*<CustomSeparator {...props.article} />*/}
-          {`第${props.article.number}条`}
-        </Typography>
-        <Typography component="div">
-          {props.article.paragraphs.map((paragraph: any, index: number) => {
-            return (
-              <React.Fragment key={index}>
-                {`第${index + 1}項:  `}
+      <Typography variant="h5" color="text.primary" gutterBottom>
+        {/*<CustomSeparator {...props.article} />*/}
+        {`第${props.article.number}条`}
+      </Typography>
+      <Typography component="div">
+        {props.article.paragraphs.map((paragraph: any, index: number) => {
+          return (
+            <React.Fragment key={index}>
+              <Typography paddingLeft={2} variant="h6">{`第${
+                index + 1
+              }項:  `}</Typography>
+              <Typography paddingLeft={4}>
                 {getPopUpParagraph(paragraph.sentence)}
-                <Items items={paragraph.items} keyword={props.keyword} />
-              </React.Fragment>
-            );
-          })}
-        </Typography>
-      </CardContent>
-      <CardActions>関連条文参照</CardActions>
-    </Card>
+              </Typography>
+              <Items items={paragraph.items} keyword={props.keyword} />
+            </React.Fragment>
+          );
+        })}
+      </Typography>
+      <Divider />
+    </Paper>
   );
 };
 
