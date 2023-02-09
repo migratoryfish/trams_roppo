@@ -32,7 +32,10 @@ const Article = (props: any) => {
               }項:  `}</Typography>
               <Typography paddingLeft={4}>
                 {/*{getPopUpParagraph(paragraph.sentence)}*/}
-                <PopUpParagraph paragraph={paragraph.sentence} />
+                <PopUpParagraph
+                  paragraph={paragraph.sentence}
+                  keyword={props.keyword}
+                />
               </Typography>
               <Items items={paragraph.items} keyword={props.keyword} />
             </React.Fragment>

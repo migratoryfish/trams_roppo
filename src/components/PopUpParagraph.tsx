@@ -1,5 +1,6 @@
 import { Tooltip } from "@mui/material";
 import React, { useState } from "react";
+import Highlighter from "react-highlight-words";
 import PopUp from "./PopUp";
 import StickyNote from "./StickyNote";
 
@@ -43,7 +44,16 @@ const PopUpParagraph = (props: any) => {
   //マッチしなかった場合そのまま出力(再帰脱出口)
   if (!leftContext) {
     console.log("マッチしませんでした");
-    return <div>{props.paragraph}</div>;
+    return (
+      <div>
+        <Highlighter
+          highlightClassName="YourHighlightClass"
+          searchWords={[props.keyword]}
+          autoEscape={true}
+          textToHighlight={props.paragraph}
+        />
+      </div>
+    );
   } else {
     // console.log("leftContext: " + leftContext);
     // console.log("lastMatch: " + lastMatch);
@@ -53,7 +63,12 @@ const PopUpParagraph = (props: any) => {
         {obj.map((pg, index, obj) => {
           return (
             <>
-              {pg.leftContext}
+              <Highlighter
+                highlightClassName="YourHighlightClass"
+                searchWords={[props.keyword]}
+                autoEscape={true}
+                textToHighlight={pg.leftContext}
+              />
               <Tooltip
                 title={
                   <React.Fragment>
@@ -69,10 +84,20 @@ const PopUpParagraph = (props: any) => {
                 <div
                   style={{ display: "inline-block", backgroundColor: "orange" }}
                 >
-                  {pg.lastMatch}
+                  <Highlighter
+                    highlightClassName="YourHighlightClass"
+                    searchWords={[props.keyword]}
+                    autoEscape={true}
+                    textToHighlight={pg.lastMatch}
+                  />
                 </div>
               </Tooltip>
-              {index === obj.length - 1 ? rightContext : ""}
+              <Highlighter
+                highlightClassName="YourHighlightClass"
+                searchWords={[props.keyword]}
+                autoEscape={true}
+                textToHighlight={index === obj.length - 1 ? rightContext : ""}
+              />
             </>
           );
         })}
