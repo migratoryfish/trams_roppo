@@ -13,7 +13,7 @@ import { Box, ButtonBase, Divider, Paper } from "@mui/material";
 import PopUp from "./PopUp";
 import { color } from "@mui/system";
 import PopUpParagraph from "./PopUpParagraph";
-
+import { v4 as uuidv4 } from "uuid";
 const Article = (props: any) => {
   return (
     <Paper>
@@ -26,7 +26,7 @@ const Article = (props: any) => {
       <Typography component="div">
         {props.article.paragraphs.map((paragraph: any, index: number) => {
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={uuidv4()}>
               <Typography paddingLeft={2} variant="h6">{`第${
                 index + 1
               }項:  `}</Typography>

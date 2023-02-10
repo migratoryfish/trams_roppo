@@ -3,7 +3,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-
+import { v4 as uuidv4 } from "uuid";
 type Props = {
   part: string;
   chapter: string;
@@ -27,7 +27,7 @@ const CustomSeparator: React.FC<Props> = ({
   const breadcrumbs = pandektens.map((pandekten, index, parent) => {
     return pandekten ? (
       <Typography
-        key={index}
+        key={uuidv4()}
         color={index === parent.length - 1 ? "text.primary" : ""}
         sx={{ fontSize: 12 }}
       >
