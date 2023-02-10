@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tab } from "@mui/material";
+import { Tab, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { FC, ReactNode } from "react";
 import LawTabPanel from "./LawTabPanel";
@@ -21,9 +21,15 @@ interface TabPanelProps {
 }
 
 const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
-  const [selectedTabValue, setSelectedTabValu] = React.useState(1);
+  const [selectedTabValue, setSelectedTabValu] = React.useState(0);
   const examList = getExamList(professionExam.toString());
-
+  if (!examList) {
+    return (
+      <>
+        <Typography variant="h4">現在未実装の試験プリセットです</Typography>
+      </>
+    );
+  }
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTabValu(newValue);
   };
@@ -51,7 +57,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
                 <Tab
                   key={uuidv4()}
                   label={law.lawName}
-                  value={(index + 1).toString()}
+                  value={index.toString()}
                 />
               );
             })}
@@ -64,7 +70,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
               <LawTabPanel
                 key={uuidv4()}
                 targetArticlesID={law.lawId}
-                value={(index + 1).toString()}
+                value={index.toString()}
               />
             );
           })}

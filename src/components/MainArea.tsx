@@ -215,8 +215,14 @@ export default function MainArea() {
                 onChange={handleChange}
               >
                 <MenuItem value={0}>司法試験</MenuItem>
-                <MenuItem value={1}>司法書士試験</MenuItem>
-                <MenuItem value={2}>行政書士試験</MenuItem>
+                <MenuItem value={1}>司法予備試験</MenuItem>
+                <MenuItem value={2}>司法書士試験</MenuItem>
+                <MenuItem value={3}>弁理士試験</MenuItem>
+                <MenuItem value={4}>税理士試験</MenuItem>
+                <MenuItem value={5}>社会保険労務士試験</MenuItem>
+                <MenuItem value={6}>行政書士試験</MenuItem>
+                <MenuItem value={7}>土地家屋調査士試験</MenuItem>
+                <MenuItem value={8}>海事代理士試験</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -247,7 +253,7 @@ export default function MainArea() {
         <Divider />
         <List>
           {[
-            "すごい機能",
+            "試験範囲横断検索",
             "とんでもない機能",
             "目が覚める機能",
             "素晴らしい機能",
