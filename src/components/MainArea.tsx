@@ -288,7 +288,11 @@ export default function MainArea() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <LawTabs keyword={keyword} professionExam={professionExam} />
+        <LawTabs
+          key={uuidv4()}
+          keyword={keyword}
+          professionExam={professionExam}
+        />
       </Main>
     </Box>
   );
