@@ -2,8 +2,9 @@ import { FC, ReactNode, useState } from "react";
 import { TabPanel } from "@mui/lab";
 import SearchBox from "./SearchBox";
 import Articles from "./Articles";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { getLawCode } from "../util/util";
+import ArticleJumpByNumber from "./ArticleJumpByNumber";
 
 type Props = {
   targetArticlesID: string;
@@ -13,6 +14,18 @@ type Props = {
 
 const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   const [keyword, setKeyword] = useState("");
+
+  //dialog 表示テストコード
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value: string) => {
+    setOpen(false);
+  };
+  //////
   const sendKeyword = (keyword: string) => {
     setKeyword(keyword);
   };
@@ -61,6 +74,10 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
           sendKeyword={sendKeyword}
           keyword={keyword}
         />
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Open simple dialog
+        </Button>
+        <ArticleJumpByNumber open={open} onClose={handleClose} />
       </Box>
       <br />
       <br />

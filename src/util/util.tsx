@@ -40,13 +40,25 @@ export const getLawCode = (lawId: string) => {
 
 export const getExamList = (profession: string) => {
   switch (profession) {
-    case "0":
+    case "0": //司法試験
       break;
-    case "1":
+    case "1": //司法予備試験
+      break;
+    case "2": //司法書士試験
       return examList.Shihoshoshi;
       break;
-    case "2":
+    case "3": //弁理士試験
+      break;
+    case "4": //税理士試験;
+      break;
+    case "5": //社会保険労務士試験
+      break;
+    case "6": //行政書士試験
       return examList.Gyoseishoshi;
+      break;
+    case "7": //土地家屋調査士試験
+      break;
+    case "8": //海事代理士試験
       break;
     default:
       console.log("想定外な士業試験です:professionNumber: " + profession);
