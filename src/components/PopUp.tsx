@@ -5,10 +5,10 @@ import { getArticleData } from "../util/util";
 import Article from "./Article";
 
 const PopUp = (props: any) => {
-  let art = getArticleData("129AC0000000089", props.articleNo);
+  let art = getArticleData(props.lawId, props.articleNo);
   return (
     <div>
-      <Article article={art} />
+      <Article article={art} lawId={props.lawId} />
     </div>
   );
 
