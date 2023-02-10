@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Highlighter from "react-highlight-words";
 import PopUp from "./PopUp";
 import StickyNote from "./StickyNote";
-
+import { v4 as uuidv4 } from "uuid";
 //TODO:これはポップアップ用文字列を作成するコンポーネントです。要修正
 //TODO:再帰だとスタックオーバーフローを起こすためループ処理に変換必須
 const PopUpParagraph = (props: any) => {
@@ -62,7 +62,7 @@ const PopUpParagraph = (props: any) => {
       <div>
         {obj.map((pg, index, obj) => {
           return (
-            <>
+            <React.Fragment key={uuidv4()}>
               <Highlighter
                 highlightClassName="YourHighlightClass"
                 searchWords={[props.keyword]}
@@ -98,7 +98,7 @@ const PopUpParagraph = (props: any) => {
                 autoEscape={true}
                 textToHighlight={index === obj.length - 1 ? rightContext : ""}
               />
-            </>
+            </React.Fragment>
           );
         })}
       </div>

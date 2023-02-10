@@ -25,3 +25,6 @@ dist-ssr
 
 #datasource
 src/datasource
+
+#componentDependencyImage
+CDImage

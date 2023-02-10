@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tab } from "@mui/material";
 import { Box } from "@mui/material";
 import { FC, ReactNode } from "react";
 import LawTabPanel from "./LawTabPanel";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { getExamList } from "../util/util";
+import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   //color: string;
@@ -46,7 +47,13 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
             scrollButtons="auto"
           >
             {examList?.map((law, index) => {
-              return <Tab label={law.lawName} value={(index + 1).toString()} />;
+              return (
+                <Tab
+                  key={uuidv4()}
+                  label={law.lawName}
+                  value={(index + 1).toString()}
+                />
+              );
             })}
           </TabList>
         </Box>
@@ -55,6 +62,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
           {examList?.map((law, index) => {
             return (
               <LawTabPanel
+                key={uuidv4()}
                 targetArticlesID={law.lawId}
                 value={(index + 1).toString()}
               />
