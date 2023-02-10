@@ -72,7 +72,7 @@ const PopUpParagraph = (props: any) => {
               <Tooltip
                 title={
                   <React.Fragment>
-                    <PopUp articleNo={pg.lastMatch} />
+                    <PopUp articleNo={pg.lastMatch} lawId={props.lawId} />
                   </React.Fragment>
                 }
                 placement="bottom-start"

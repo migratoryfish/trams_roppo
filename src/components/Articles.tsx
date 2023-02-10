@@ -61,7 +61,12 @@ const Articles = (props: any) => {
       >
         {list.map((article, index) => {
           return (
-            <Article key={uuidv4()} article={article} keyword={props.keyword} />
+            <Article
+              key={uuidv4()}
+              article={article}
+              keyword={props.keyword}
+              lawId={props.lawId}
+            />
           );
         })}
       </InfiniteScroll>
