@@ -64,7 +64,11 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
       </Box>
       <br />
       <br />
-      <Articles keyword={keyword} articles={[...data]} />
+      <Articles
+        keyword={keyword}
+        articles={[...data]}
+        lawId={extArticleData.lawId}
+      />
     </TabPanel>
   );
 };

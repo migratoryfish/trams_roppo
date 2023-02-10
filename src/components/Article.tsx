@@ -35,6 +35,7 @@ const Article = (props: any) => {
                 <PopUpParagraph
                   paragraph={paragraph.sentence}
                   keyword={props.keyword}
+                  lawId={props.lawId}
                 />
               </Typography>
               <Items items={paragraph.items} keyword={props.keyword} />
