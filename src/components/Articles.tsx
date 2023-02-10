@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import React, { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Article from "./Article";
-
+import { v4 as uuidv4 } from "uuid";
 const Articles = (props: any) => {
   console.log("props.articles: " + props.articles.length);
   const original = useRef(props.articles);
@@ -61,7 +61,7 @@ const Articles = (props: any) => {
       >
         {list.map((article, index) => {
           return (
-            <Article key={index} article={article} keyword={props.keyword} />
+            <Article key={uuidv4()} article={article} keyword={props.keyword} />
           );
         })}
       </InfiniteScroll>

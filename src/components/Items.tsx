@@ -1,7 +1,7 @@
 import Typography from "@mui/material/Typography";
 import React from "react";
 import Highlighter from "react-highlight-words";
-
+import { v4 as uuidv4 } from "uuid";
 const Paragraph = (props: any) => {
   //
   //
@@ -19,7 +19,7 @@ const Paragraph = (props: any) => {
         })
         .map((item: any, index: number) => {
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={uuidv4()}>
               <Highlighter
                 highlightClassName="YourHighlightClass2"
                 searchWords={[props.keyword]}
