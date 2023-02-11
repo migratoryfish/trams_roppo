@@ -4,8 +4,11 @@ import Highlighter from "react-highlight-words";
 import PopUp from "./PopUp";
 import StickyNote from "./StickyNote";
 import { v4 as uuidv4 } from "uuid";
+import { getMatchObject } from "../util/util";
+import HighLStrInBrackets from "./HighLStrInBrackets";
 //TODO:これはポップアップ用文字列を作成するコンポーネントです。要修正
 //TODO:再帰だとスタックオーバーフローを起こすためループ処理に変換必須
+//TODO:コンポーネントを引数にとるコンポーネントがほしいな
 const PopUpParagraph = (props: any) => {
   const [isPopup, setIsPopup] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
@@ -27,15 +30,20 @@ const PopUpParagraph = (props: any) => {
     //ボタンをクリックするとポップアップを固定/解除
     // setIsFixed(!isFixed);
   };
-  let { leftContext, lastMatch, rightContext } = getPopUpParser(
-    props.paragraph
+  //TODO:文字数を限定 (ex:三百二十一 で最大でも5文字なので)　一時的対応要修正
+  let { leftContext, lastMatch, rightContext } = getMatchObject(
+    props.paragraph,
+    "第.{1,5}条"
   );
   let obj = [];
   while (leftContext) {
     obj.push({ leftContext, lastMatch });
     let prevlastMatch = lastMatch;
-
-    ({ leftContext, lastMatch, rightContext } = getPopUpParser(rightContext));
+    //TODO:文字数を限定 (ex:三百二十一 で最大でも5文字なので)　一時的対応要修正
+    ({ leftContext, lastMatch, rightContext } = getMatchObject(
+      rightContext,
+      "第.{1,5}条"
+    ));
     if (prevlastMatch === lastMatch) break;
   }
 
@@ -43,16 +51,16 @@ const PopUpParagraph = (props: any) => {
 
   //マッチしなかった場合そのまま出力(再帰脱出口)
   if (!leftContext) {
-    console.log("マッチしませんでした");
+    console.log("マッチしませんでした: props.paragraph: " + props.paragraph);
+    //return <div>{props.paragraph}</div>;
+    //return HighLStrInBrackets(props.paragraph);
+    // return <div>{props.paragraph}</div>;
     return (
-      <div>
-        <Highlighter
-          highlightClassName="YourHighlightClass"
-          searchWords={[props.keyword]}
-          autoEscape={true}
-          textToHighlight={props.paragraph}
-        />
-      </div>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: HighLStrInBrackets(props.paragraph),
+        }}
+      />
     );
   } else {
     // console.log("leftContext: " + leftContext);
@@ -64,7 +72,7 @@ const PopUpParagraph = (props: any) => {
           return (
             <React.Fragment key={uuidv4()}>
               <Highlighter
-                highlightClassName="YourHighlightClass"
+                highlightClassName="YourHighlightClass1"
                 searchWords={[props.keyword]}
                 autoEscape={true}
                 textToHighlight={pg.leftContext}
@@ -85,7 +93,7 @@ const PopUpParagraph = (props: any) => {
                   style={{ display: "inline-block", backgroundColor: "orange" }}
                 >
                   <Highlighter
-                    highlightClassName="YourHighlightClass"
+                    highlightClassName="YourHighlightClass2"
                     searchWords={[props.keyword]}
                     autoEscape={true}
                     textToHighlight={pg.lastMatch}
@@ -93,7 +101,7 @@ const PopUpParagraph = (props: any) => {
                 </div>
               </Tooltip>
               <Highlighter
-                highlightClassName="YourHighlightClass"
+                highlightClassName="YourHighlightClass3"
                 searchWords={[props.keyword]}
                 autoEscape={true}
                 textToHighlight={index === obj.length - 1 ? rightContext : ""}
@@ -125,20 +133,21 @@ const PopUpParagraph = (props: any) => {
   // );
 };
 
-const getPopUpParser = (paragraph: string) => {
-  //TODO:文字数を限定 (ex:三百二十一 で最大でも5文字なので)　一時的対応要修正
-  const matching = paragraph.match(/第.{1,5}条/);
-  // const remaining = paragraph.replace(/第.*?条/, "");
+// const getPopUpParser = (targetStr: string, matcher: string) => {
+//   const reg = new RegExp(matcher);
+//   const matching = targetStr.match(matcher);
+//   //const matching = targetStr.match(/第.{1,5}条/);
+//   // const remaining = paragraph.replace(/第.*?条/, "");
 
-  const leftContext = RegExp.leftContext;
-  const lastMatch = RegExp.lastMatch;
-  const rightContext = RegExp.rightContext;
+//   const leftContext = RegExp.leftContext;
+//   const lastMatch = RegExp.lastMatch;
+//   const rightContext = RegExp.rightContext;
 
-  return {
-    leftContext,
-    lastMatch,
-    rightContext,
-  };
-};
+//   return {
+//     leftContext,
+//     lastMatch,
+//     rightContext,
+//   };
+// };
 
 export default PopUpParagraph;

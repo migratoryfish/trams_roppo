@@ -1,10 +1,10 @@
+//TODO:要モック化
 import minpoArticleData from "../datasource/minpoArticle.json";
-
 import kenpoArticleData from "../datasource/kenpo.json";
 import kaisyahoArticleData from "../datasource/kaisyaho.json";
 import hudosantoukihoArticleData from "../datasource/hudosantoukiho.json";
 import syogyotoukihoArticleData from "../datasource/syogyotoukiho.json";
-
+import syakaihokenroumushihoArticleData from "../datasource/syakaihokenroumushi.json";
 import examList from "../datasource/lawNameInfos.json";
 
 // str: 日付文字列（yyyyMMdd）
@@ -19,6 +19,7 @@ export function toDate(str: string): string {
   return retDate;
 }
 
+//TODO:将来的にモック対応
 export const getLawCode = (lawId: string) => {
   let extArticleData;
   if (lawId === "129AC0000000089") {
@@ -31,6 +32,8 @@ export const getLawCode = (lawId: string) => {
     extArticleData = kaisyahoArticleData;
   } else if (lawId === "338AC0000000125") {
     extArticleData = syogyotoukihoArticleData;
+  } else if (lawId === "343AC1000000089") {
+    extArticleData = syakaihokenroumushihoArticleData;
   } else {
     extArticleData = kenpoArticleData;
   }
@@ -52,6 +55,7 @@ export const getExamList = (profession: string) => {
     case "4": //税理士試験;
       break;
     case "5": //社会保険労務士試験
+      return examList.Syakaihokenroumushi;
       break;
     case "6": //行政書士試験
       return examList.Gyoseishoshi;
@@ -168,4 +172,19 @@ export const kanjiToken2arabiaToken = (ktoken: string) => {
   }
 
   return atoken;
+};
+
+export const getMatchObject = (targetStr: string, matcher: string) => {
+  const reg = new RegExp(matcher);
+  const matching = targetStr.match(matcher);
+
+  const leftContext = RegExp.leftContext;
+  const lastMatch = RegExp.lastMatch;
+  const rightContext = RegExp.rightContext;
+
+  return {
+    leftContext,
+    lastMatch,
+    rightContext,
+  };
 };

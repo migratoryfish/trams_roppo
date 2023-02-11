@@ -21,7 +21,7 @@ const Paragraph = (props: any) => {
           return (
             <React.Fragment key={uuidv4()}>
               <Highlighter
-                highlightClassName="YourHighlightClass2"
+                highlightClassName="YourHighlightClass5"
                 searchWords={[props.keyword]}
                 autoEscape={true}
                 textToHighlight={item}
