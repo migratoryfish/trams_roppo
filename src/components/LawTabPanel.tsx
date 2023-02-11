@@ -2,9 +2,18 @@ import { FC, ReactNode, useState } from "react";
 import { TabPanel } from "@mui/lab";
 import SearchBox from "./SearchBox";
 import Articles from "./Articles";
-import { Box, Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Grid,
+  Popper,
+  TextField,
+} from "@mui/material";
 import { getLawCode } from "../util/util";
 import ArticleJumpByNumber from "./ArticleJumpByNumber";
+import { ReplyAll } from "@mui/icons-material";
+import { flexbox } from "@mui/system";
 
 type Props = {
   targetArticlesID: string;
@@ -69,14 +78,19 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
           backgroundColor: "azure",
         }}
       >
-        <SearchBox
-          placeholder={"条文検索"}
-          sendKeyword={sendKeyword}
-          keyword={keyword}
-        />
+        <Box alignItems={"flex-end"} sx={{ display: "inline-block" }}>
+          <SearchBox
+            placeholder={"条文検索"}
+            sendKeyword={sendKeyword}
+            keyword={keyword}
+          />
+        </Box>
+        {/*
         <Button variant="outlined" onClick={handleClickOpen}>
           Open simple dialog
         </Button>
+      */}
+
         <ArticleJumpByNumber open={open} onClose={handleClose} />
       </Box>
       <br />
