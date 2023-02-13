@@ -19,8 +19,10 @@ const Article = (props: any) => {
     <Paper>
       <Divider />
       {/* 読み込み最中に表示する項目 */}
-      <Typography variant="h5" color="text.primary" gutterBottom>
-        {/*<CustomSeparator {...props.article} />*/}
+      <Typography variant="h6" color="text.primary">
+        {props.article.articleCaption}
+      </Typography>
+      <Typography variant="h6" color="text.primary">
         {`第${props.article.number}条`}
       </Typography>
       <Typography component="div">
