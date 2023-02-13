@@ -26,7 +26,8 @@ const PopUpParagraph = (props: any) => {
         {pg.map((token, index: number, pg) => {
           return (
             <>
-              {token.text}
+              <BracketHighLighter bracketToHighlight={token.text} />
+
               <Tooltip
                 title={
                   <React.Fragment>
@@ -42,7 +43,6 @@ const PopUpParagraph = (props: any) => {
                   {token.match}
                 </div>
               </Tooltip>
-              {index === pg.length - 1 ? token.text : ""}
             </>
           );
         })}
