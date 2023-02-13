@@ -1,17 +1,9 @@
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
 
-import React, { useState } from "react";
+import React from "react";
 import Items from "./Items";
 
-import Highlighter from "react-highlight-words";
-import { Box, ButtonBase, Divider, Paper } from "@mui/material";
-import PopUp from "./PopUp";
-import { color } from "@mui/system";
+import { Divider, Paper } from "@mui/material";
 import PopUpParagraph from "./PopUpParagraph";
 import { v4 as uuidv4 } from "uuid";
 const Article = (props: any) => {
