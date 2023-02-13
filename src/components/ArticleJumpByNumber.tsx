@@ -1,29 +1,12 @@
 import {
-  Avatar,
   Box,
   Button,
   ButtonGroup,
-  Dialog,
-  DialogTitle,
-  Fab,
   Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
   Popper,
   TextField,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import { blue } from "@mui/material/colors";
-import {
-  Backspace,
-  Grid3x3,
-  Reply,
-  ReplyAll,
-  Scale,
-} from "@mui/icons-material";
+import { Backspace, ReplyAll } from "@mui/icons-material";
 import { useState } from "react";
 
 export type ArticleJumpByNumberProps = {
