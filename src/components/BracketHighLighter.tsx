@@ -21,12 +21,18 @@ const BracketHighLighter: FC<Props> = ({ bracketToHighlight, lawId }) => {
   //終了のカッコでsplit
   const splitCloseBrackets = bracketToHighlight.split("）");
 
-  //開始のカッコの数と終了のかっこの数が一致しない場合ハイライト処理中断
+  //開始のカッコの数と終了のかっこの数が一致しない場合カッコハイライト処理中断
   if (splitOpenBrackets.length !== splitCloseBrackets.length) {
-    return <Box component="span">{bracketToHighlight}</Box>;
-    //カッコが無ければこの時点でハイライト処理中断
+    return (
+      <Box component="span">
+        <TextHighLighter textToHighlight={bracketToHighlight} lawId={lawId} />
+      </Box>
+    );
+    //カッコが無ければこの時点でカッコハイライト処理中断
   } else if (splitOpenBrackets.length === 1) {
-    return <Box component="span">{bracketToHighlight}</Box>;
+    <Box component="span">
+      <TextHighLighter textToHighlight={bracketToHighlight} lawId={lawId} />
+    </Box>;
   }
 
   let level = 0;
