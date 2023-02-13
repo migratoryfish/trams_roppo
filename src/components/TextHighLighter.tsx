@@ -1,14 +1,16 @@
 import { Box } from "@mui/material";
 import { FC } from "react";
+import ArticlePopUpBase from "./ReturnToken";
 
 type Props = {
   textToHighlight: string;
   color?: string;
   level?: number;
+  lawId: string;
 };
 
 const TextHighLighter: FC<Props> = (props: Props) => {
-  const { textToHighlight, color = "#FFFF00", level = -1 } = props;
+  const { textToHighlight, color = "#FFFF00", level = -1, lawId } = props;
 
   const style =
     level < 0
@@ -23,7 +25,7 @@ const TextHighLighter: FC<Props> = (props: Props) => {
         background: style,
       }}
     >
-      {textToHighlight}
+      <ArticlePopUpBase str={textToHighlight} lawId={lawId} />
     </Box>
   );
 };

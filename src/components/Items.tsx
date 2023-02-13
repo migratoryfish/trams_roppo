@@ -3,15 +3,7 @@ import React from "react";
 import Highlighter from "react-highlight-words";
 import { v4 as uuidv4 } from "uuid";
 import BracketHighLighter from "./BracketHighLighter";
-const Paragraph = (props: any) => {
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-
+const Item = (props: any) => {
   return (
     <Typography component="div" paddingLeft={6}>
       {props.items
@@ -21,14 +13,10 @@ const Paragraph = (props: any) => {
         .map((item: any, index: number) => {
           return (
             <React.Fragment key={uuidv4()}>
-              <BracketHighLighter bracketToHighlight={item} />
-              {/* <Highlighter
-                highlightClassName="YourHighlightClass5"
-                searchWords={[props.keyword]}
-                autoEscape={true}
-                textToHighlight={item}
-              /> */}
-
+              <BracketHighLighter
+                bracketToHighlight={item}
+                lawId={props.lawId}
+              />
               <br />
             </React.Fragment>
           );
@@ -36,4 +24,4 @@ const Paragraph = (props: any) => {
     </Typography>
   );
 };
-export default Paragraph;
+export default Item;

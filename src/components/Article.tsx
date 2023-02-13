@@ -10,11 +10,10 @@ const Article = (props: any) => {
   return (
     <Paper>
       <Divider />
-      {/* 読み込み最中に表示する項目 */}
       <Typography variant="h6" color="text.primary">
         {props.article.articleCaption}
       </Typography>
-      <Typography variant="h6" color="text.primary">
+      <Typography variant="h6" color="text.primary" id={props.article.number}>
         {`第${props.article.number}条`}
       </Typography>
       <Typography component="div">
@@ -25,14 +24,17 @@ const Article = (props: any) => {
                 index + 1
               }項:  `}</Typography>
               <Typography paddingLeft={4}>
-                {/*{getPopUpParagraph(paragraph.sentence)}*/}
                 <PopUpParagraph
                   paragraph={paragraph.sentence}
                   keyword={props.keyword}
                   lawId={props.lawId}
                 />
               </Typography>
-              <Items items={paragraph.items} keyword={props.keyword} />
+              <Items
+                items={paragraph.items}
+                keyword={props.keyword}
+                lawId={props.lawId}
+              />
             </React.Fragment>
           );
         })}

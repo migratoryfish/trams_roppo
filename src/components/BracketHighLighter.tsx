@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   bracketToHighlight: string;
+  lawId: string;
 };
 
 type BracketHighLSet = {
@@ -12,7 +13,7 @@ type BracketHighLSet = {
   level: number;
 };
 
-const BracketHighLighter: FC<Props> = ({ bracketToHighlight }) => {
+const BracketHighLighter: FC<Props> = ({ bracketToHighlight, lawId }) => {
   const bracketLevelStack: BracketHighLSet[] = [];
 
   //開始のカッコでsplit
@@ -68,6 +69,7 @@ const BracketHighLighter: FC<Props> = ({ bracketToHighlight }) => {
             key={uuidv4()}
             textToHighlight={token.token}
             level={token.level}
+            lawId={lawId}
           />
         );
       })}
