@@ -36,12 +36,6 @@ const Articles = (props: any) => {
     } else if (original.current.length > 0) {
       setList([...list, ...original.current]);
     }
-    // if (original.current.length >= 5) {
-    //   original.current.splice(0, 5);
-    //   setList([...list, ...original.current.slice(0, 5)]);
-    // } else {
-    //   setList([...list, ...original.current]);
-    // }
   };
 
   const loader = <div>ローディング中です…</div>;
