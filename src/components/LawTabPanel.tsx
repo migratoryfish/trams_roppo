@@ -14,7 +14,7 @@ import { getLawCode } from "../util/util";
 import ArticleJumpByNumber from "./ArticleJumpByNumber";
 import { ReplyAll } from "@mui/icons-material";
 import { flexbox } from "@mui/system";
-
+import { v4 as uuidv4 } from "uuid";
 type Props = {
   targetArticlesID: string;
   value: string;
@@ -96,8 +96,9 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
       <br />
       <br />
       <Articles
+        key={uuidv4()}
         keyword={keyword}
-        articles={[...data]}
+        articles={data}
         lawId={extArticleData.lawId}
       />
     </TabPanel>

@@ -20,9 +20,9 @@ const Articles = (props: any) => {
   //暫定措置 keyをコンポーネントに渡すと解消するらしいが…現時点で不可
   //初期stateが初期化されない問題への対処
   //TODO:ここにもprops.articlesが10未満の場合のコード必要
-  useEffect(() => {
-    setList([...props.articles].slice(0, 10));
-  }, [props.keyword]);
+  // useEffect(() => {
+  //   setList([...props.articles].slice(0, 10));
+  // }, [props.keyword]);
 
   const fetchMoreData = () => {
     if (original.current.length >= 10) {
@@ -38,7 +38,8 @@ const Articles = (props: any) => {
     }
   };
 
-  const loader = <div>ローディング中です…</div>;
+  // const loader = <div>ローディング中です…</div>;
+  const loader = <div></div>;
 
   return (
     <Box>
