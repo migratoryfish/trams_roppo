@@ -6,6 +6,8 @@ import StickyNote from "./StickyNote";
 import { v4 as uuidv4 } from "uuid";
 import { getMatchObject } from "../util/util";
 import HighLStrInBrackets from "./HighLStrInBrackets";
+import TextHighLighter from "./TextHighLighter";
+import BracketHighLighter from "./BracketHighLighter";
 //TODO:これはポップアップ用文字列を作成するコンポーネントです。要修正
 //TODO:再帰だとスタックオーバーフローを起こすためループ処理に変換必須
 //TODO:コンポーネントを引数にとるコンポーネントがほしいな
@@ -55,62 +57,64 @@ const PopUpParagraph = (props: any) => {
     //return <div>{props.paragraph}</div>;
     //return HighLStrInBrackets(props.paragraph);
     // return <div>{props.paragraph}</div>;
-    return (
-      <div
-        dangerouslySetInnerHTML={{
-          __html: HighLStrInBrackets(props.paragraph),
-        }}
-      />
-    );
+    return <BracketHighLighter bracketToHighlight={props.paragraph} />;
+    // return (
+    //   <div
+    //     dangerouslySetInnerHTML={{
+    //       __html: HighLStrInBrackets(props.paragraph),
+    //     }}
+    //   />
+    // );
   } else {
     // console.log("leftContext: " + leftContext);
     // console.log("lastMatch: " + lastMatch);
     // console.log("rightContext: " + rightContext);
-    return (
-      <div>
-        {obj.map((pg, index, obj) => {
-          return (
-            <React.Fragment key={uuidv4()}>
-              <Highlighter
-                highlightClassName="YourHighlightClass1"
-                searchWords={[props.keyword]}
-                autoEscape={true}
-                textToHighlight={pg.leftContext}
-              />
-              <Tooltip
-                title={
-                  <React.Fragment>
-                    <PopUp articleNo={pg.lastMatch} lawId={props.lawId} />
-                  </React.Fragment>
-                }
-                placement="bottom-start"
-                arrow
-                onOpen={handleOpen}
-                onClose={handleClose}
-                onClick={handleMouseClick}
-              >
-                <div
-                  style={{ display: "inline-block", backgroundColor: "orange" }}
-                >
-                  <Highlighter
-                    highlightClassName="YourHighlightClass2"
-                    searchWords={[props.keyword]}
-                    autoEscape={true}
-                    textToHighlight={pg.lastMatch}
-                  />
-                </div>
-              </Tooltip>
-              <Highlighter
-                highlightClassName="YourHighlightClass3"
-                searchWords={[props.keyword]}
-                autoEscape={true}
-                textToHighlight={index === obj.length - 1 ? rightContext : ""}
-              />
-            </React.Fragment>
-          );
-        })}
-      </div>
-    );
+    return <BracketHighLighter bracketToHighlight={props.paragraph} />;
+    // return (
+    //   <div>
+    //     {obj.map((pg, index, obj) => {
+    //       return (
+    //         <React.Fragment key={uuidv4()}>
+    //           <Highlighter
+    //             highlightClassName="YourHighlightClass1"
+    //             searchWords={[props.keyword]}
+    //             autoEscape={true}
+    //             textToHighlight={pg.leftContext}
+    //           />
+    //           <Tooltip
+    //             title={
+    //               <React.Fragment>
+    //                 <PopUp articleNo={pg.lastMatch} lawId={props.lawId} />
+    //               </React.Fragment>
+    //             }
+    //             placement="bottom-start"
+    //             arrow
+    //             onOpen={handleOpen}
+    //             onClose={handleClose}
+    //             onClick={handleMouseClick}
+    //           >
+    //             <div
+    //               style={{ display: "inline-block", backgroundColor: "orange" }}
+    //             >
+    //               <Highlighter
+    //                 highlightClassName="YourHighlightClass2"
+    //                 searchWords={[props.keyword]}
+    //                 autoEscape={true}
+    //                 textToHighlight={pg.lastMatch}
+    //               />
+    //             </div>
+    //           </Tooltip>
+    //           <Highlighter
+    //             highlightClassName="YourHighlightClass3"
+    //             searchWords={[props.keyword]}
+    //             autoEscape={true}
+    //             textToHighlight={index === obj.length - 1 ? rightContext : ""}
+    //           />
+    //         </React.Fragment>
+    //       );
+    //     })}
+    //   </div>
+    // );
   }
 
   //マッチした場合
