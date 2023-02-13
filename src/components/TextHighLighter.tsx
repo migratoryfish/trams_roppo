@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { FC } from "react";
-import ArticlePopUpBase from "./ReturnToken";
+import ArticlePopUpBase from "./ArticlePopUpBase";
 
 type Props = {
   textToHighlight: string;
