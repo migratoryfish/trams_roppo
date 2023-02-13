@@ -1,8 +1,9 @@
-import { Tooltip } from "@mui/material";
+import { Tooltip, Typography } from "@mui/material";
 import React, { useState } from "react";
 import PopUp from "./PopUp";
 import { v4 as uuidv4 } from "uuid";
 import BracketHighLighter from "./BracketHighLighter";
+import { LinearGradient } from "react-text-gradients";
 
 const PopUpParagraph = (props: any) => {
   const reg = new RegExp("(第.{1,5}条)");
@@ -37,11 +38,11 @@ const PopUpParagraph = (props: any) => {
                 placement="bottom-start"
                 arrow
               >
-                <div
-                  style={{ display: "inline-block", backgroundColor: "orange" }}
-                >
-                  {token.match}
-                </div>
+                <Typography sx={{ display: "inline-block" }}>
+                  <LinearGradient gradient={["to left", "#17acff ,#ff68f0"]}>
+                    {token.match}
+                  </LinearGradient>
+                </Typography>
               </Tooltip>
             </>
           );
