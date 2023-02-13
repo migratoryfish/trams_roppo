@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import Highlighter from "react-highlight-words";
 import { v4 as uuidv4 } from "uuid";
+import BracketHighLighter from "./BracketHighLighter";
 const Paragraph = (props: any) => {
   //
   //
@@ -20,12 +21,13 @@ const Paragraph = (props: any) => {
         .map((item: any, index: number) => {
           return (
             <React.Fragment key={uuidv4()}>
-              <Highlighter
+              <BracketHighLighter bracketToHighlight={item} />
+              {/* <Highlighter
                 highlightClassName="YourHighlightClass5"
                 searchWords={[props.keyword]}
                 autoEscape={true}
                 textToHighlight={item}
-              />
+              /> */}
 
               <br />
             </React.Fragment>
