@@ -1,69 +1,77 @@
 import Box from "@mui/material/Box";
 import React, { useEffect, useRef, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+//import InfiniteScroll from "react-infinite-scroll-component";
 import Article from "./Article";
 import { v4 as uuidv4 } from "uuid";
+
+import InfiniteScroll from "react-infinite-scroller";
 const Articles = (props: any) => {
-  console.log("props.articles: " + props.articles.length);
-  const original = useRef(props.articles);
+  const [list, setList] = useState<any[]>([]); //表示するデータ
+  const [hasMore, setHasMore] = useState(true); //再読み込み判定
+  const [isFetching, setIsFetching] = useState(false);
+  const original = useRef(props.articles); //データソース
 
-  //5未満の条文数だと無限スクロールに不具合発生
-  //TODO:
-  // const [list, setList] = useState<any[]>([...original.current].slice(0, 5));
-  const [list, setList] = useState<any[]>(
-    props.articles.length < 10
-      ? [...props.articles]
-      : props.articles.slice(0, 10)
-  );
-  //original.current.splice(0, 3); ここに書くとダメ
+  const numberOfArticlesPerPage = 10;
+  //項目を読み込むときのコールバック
+  const loadMore = (page: any) => {
+    try {
+      setIsFetching(true);
+      {
+        // const response = await fetch(`http://localhost:3000/api/test?page=${page}`); //API通信
+        // const data = await response.json(); //取得データ
 
-  //暫定措置 keyをコンポーネントに渡すと解消するらしいが…現時点で不可
-  //初期stateが初期化されない問題への対処
-  //TODO:ここにもprops.articlesが10未満の場合のコード必要
-  // useEffect(() => {
-  //   setList([...props.articles].slice(0, 10));
-  // }, [props.keyword]);
+        console.log("loadMore.page: " + page);
+        const data = original.current.slice(
+          (page - 1) * numberOfArticlesPerPage,
+          page * numberOfArticlesPerPage
+        );
 
-  const fetchMoreData = () => {
-    if (original.current.length >= 10) {
-      original.current.splice(0, 10);
-    } else if (original.current.length > 0) {
-      original.current.splice(0, original.current.length);
-    }
-
-    if (original.current.length >= 10) {
-      setList([...list, ...original.current.slice(0, 10)]);
-    } else if (original.current.length > 0) {
-      setList([...list, ...original.current]);
+        //データ件数が0件の場合、処理終了
+        if (data.length < 1) {
+          console.log("data.length < 1");
+          setHasMore(false);
+          return;
+        }
+        //取得データをリストに追加
+        setList([...list, ...data]);
+      }
+    } finally {
+      setIsFetching(false);
     }
   };
 
-  // const loader = <div>ローディング中です…</div>;
-  const loader = <div></div>;
+  //各スクロール要素
+  const aricles = (
+    <>
+      {list.map((article, index) => {
+        return (
+          <Article
+            key={uuidv4()}
+            article={article}
+            keyword={props.keyword}
+            lawId={props.lawId}
+          />
+        );
+      })}
+    </>
+  );
+
+  //ロード中に表示する項目
+  const loader = (
+    <div className="loader" key={0}>
+      Loading ...
+    </div>
+  );
 
   return (
     <Box>
       <InfiniteScroll
-        dataLength={list.length} //現在のデータの長さ
-        next={fetchMoreData} // スクロール位置を監視してコールバック（次のデータを読み込ませる）
-        hasMore={true} // さらにスクロールするかどうか（ある一定数のデータ数に達したらfalseを返すことで無限スクロールを回避）
-        loader={loader} // ローディング中のコンポーネント
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
+        pageStart={0}
+        loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
+        hasMore={!isFetching && hasMore} //読み込みを行うかどうかの判定
+        loader={loader}
       >
-        {list.map((article, index) => {
-          return (
-            <Article
-              key={uuidv4()}
-              article={article}
-              keyword={props.keyword}
-              lawId={props.lawId}
-            />
-          );
-        })}
+        {aricles} {/* 無限スクロールで表示する項目 */}
       </InfiniteScroll>
     </Box>
   );
