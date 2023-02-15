@@ -2,6 +2,8 @@ import { Tooltip, Typography } from "@mui/material";
 import { FC } from "react";
 import { LinearGradient } from "react-text-gradients";
 import PopUp from "./PopUp";
+import { useContext } from "react";
+import { PopUpArticleContext } from "../libs/SettingContext";
 
 type Props = {
   str: string;
@@ -21,7 +23,10 @@ const ArticlePopUpBase: FC<Props> = ({ str, lawId }) => {
     }
   }
 
-  if (splitedStr.length === 1) {
+  const { isPopUpArticle, setIsPopUpArticle } = useContext(PopUpArticleContext);
+  if (!isPopUpArticle) {
+    return <>{str}</>;
+  } else if (splitedStr.length === 1) {
     return <>{str}</>;
   } else {
     return (

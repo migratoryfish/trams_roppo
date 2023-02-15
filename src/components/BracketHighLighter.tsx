@@ -2,6 +2,8 @@ import { Box } from "@mui/material";
 import { FC } from "react";
 import TextHighLighter from "./TextHighLighter";
 import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
+import { BracketHighLightContext } from "../libs/SettingContext";
 
 type Props = {
   bracketToHighlight: string;
@@ -14,6 +16,13 @@ type BracketHighLSet = {
 };
 
 const BracketHighLighter: FC<Props> = ({ bracketToHighlight, lawId }) => {
+  const { isBracketHighLight, setIsBracketHighLight } = useContext(
+    BracketHighLightContext
+  );
+  if (!isBracketHighLight) {
+    return <Box component="span">{bracketToHighlight}</Box>;
+  }
+
   const bracketLevelStack: BracketHighLSet[] = [];
 
   //開始のカッコでsplit
