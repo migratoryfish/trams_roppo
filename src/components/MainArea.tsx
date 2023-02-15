@@ -26,7 +26,7 @@ import {
 } from "@mui/icons-material";
 import LawTabs from "./LawTabs";
 import InputBase from "@mui/material/InputBase";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import {
   FormControl,
   InputLabel,
@@ -35,6 +35,9 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
+import { BracketHighLightContext } from "../libs/SettingContext";
+import { PopUpArticleContext } from "../libs/SettingContext";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -129,7 +132,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function MainArea() {
   const theme = useTheme();
-
+  const { isBracketHighLight, setIsBracketHighLight } = useContext(
+    BracketHighLightContext
+  );
+  const { isPopUpArticle, setIsPopUpArticle } = useContext(PopUpArticleContext);
   //select(プルダウン)用テストコードS
   const [professionExam, setProfessionExam] = useState("");
 
@@ -160,7 +166,12 @@ export default function MainArea() {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = (event: React.MouseEvent<HTMLElement>) => {
+    if (event.currentTarget.textContent === "カッコハイライト") {
+      setIsBracketHighLight(!isBracketHighLight);
+    } else if (event.currentTarget.textContent === "条文ポップアップ") {
+      setIsPopUpArticle(!isPopUpArticle);
+    }
     setOpen(false);
   };
 
@@ -254,16 +265,16 @@ export default function MainArea() {
         <List>
           {[
             "試験範囲横断検索",
-            "とんでもない機能",
-            "目が覚める機能",
+            "カッコハイライト",
+            "条文ポップアップ",
             "素晴らしい機能",
             "唯一無二な機能",
             "地味だけど良い機能",
             "渋い機能",
             "おいしい機能",
           ].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
+            <ListItem key={text} disablePadding value={index}>
+              <ListItemButton onClick={handleDrawerClose}>
                 <ListItemIcon>{<Lens />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
