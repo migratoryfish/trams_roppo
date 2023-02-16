@@ -1,79 +1,136 @@
 import Box from "@mui/material/Box";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 //import InfiniteScroll from "react-infinite-scroll-component";
 import Article from "./Article";
 import { v4 as uuidv4 } from "uuid";
 
 import InfiniteScroll from "react-infinite-scroller";
+import { Virtuoso } from "react-virtuoso";
+
 const Articles = (props: any) => {
-  const [list, setList] = useState<any[]>([]); //表示するデータ
-  const [hasMore, setHasMore] = useState(true); //再読み込み判定
-  const [isFetching, setIsFetching] = useState(false);
+  //   const [list, setList] = useState<any[]>([]); //表示するデータ
+  //   const [hasMore, setHasMore] = useState(true); //再読み込み判定
+  //   const [isFetching, setIsFetching] = useState(false);
+  //   const original = useRef(props.articles); //データソース
+  //   const jumpIndex = props.jumpIndex ? props.jumpIndex : -1;
+  //   console.log("jumpIndex :" + jumpIndex);
+  // const numberOfArticlesPerPage = 10;
+
+  // const START_INDEX = 100;
+  const START_INDEX: number = !props.jumpIndex
+    ? 0
+    : props.jumpIndex >= props.articles.length
+    ? props.articles.length - 1
+    : isNaN(props.jumpIndex)
+    ? 0
+    : props.jumpIndex;
+  const INITIAL_ITEM_COUNT = 1;
+
   const original = useRef(props.articles); //データソース
+  const [firstItemPreIndex, setFirstItemPreIndex] = useState(START_INDEX);
+  const [firstItemMoreIndex, setFirstItemMoreIndex] = useState(START_INDEX);
+  const firstItemPreIndexRef = useRef(firstItemPreIndex);
+  firstItemPreIndexRef.current = firstItemPreIndex;
+  const firstItemMoreIndexRef = useRef(firstItemMoreIndex);
+  firstItemMoreIndexRef.current = firstItemMoreIndex;
 
-  const numberOfArticlesPerPage = 10;
-  //項目を読み込むときのコールバック
-  const loadMore = (page: any) => {
-    try {
-      setIsFetching(true);
-      {
-        // const response = await fetch(`http://localhost:3000/api/test?page=${page}`); //API通信
-        // const data = await response.json(); //取得データ
+  const [users, setUsers] = useState(() =>
+    original.current.slice(START_INDEX, START_INDEX + INITIAL_ITEM_COUNT)
+  );
 
-        console.log("loadMore.page: " + page);
-        const data = original.current.slice(
-          (page - 1) * numberOfArticlesPerPage,
-          page * numberOfArticlesPerPage
-        );
+  const prependItems = useCallback(() => {
+    let usersToPrepend = 20;
+    let nextFirstItemIndex = firstItemPreIndex - usersToPrepend;
 
-        //データ件数が0件の場合、処理終了
-        if (data.length < 1) {
-          console.log("data.length < 1");
-          setHasMore(false);
-          return;
-        }
-        //取得データをリストに追加
-        setList([...list, ...data]);
-      }
-    } finally {
-      setIsFetching(false);
+    //先頭データが存在しない場合
+    if (firstItemPreIndex === 0) return false;
+
+    //先頭データ末端の場合の処理
+    if (nextFirstItemIndex < 0) {
+      nextFirstItemIndex = 0;
+      usersToPrepend = firstItemPreIndex;
     }
-  };
 
-  //各スクロール要素
-  const aricles = (
-    <>
-      {list.map((article, index) => {
+    setTimeout(() => {
+      setFirstItemPreIndex(() => nextFirstItemIndex);
+      setUsers(() => [
+        ...original.current.slice(
+          nextFirstItemIndex,
+          nextFirstItemIndex + usersToPrepend
+        ),
+        // ...generateUsers(usersToPrepend, nextFirstItemIndex),
+        ...users,
+      ]);
+    }, 500);
+
+    return false;
+  }, [firstItemPreIndex, users, setUsers]);
+
+  const loadMore = useCallback(() => {
+    const usersToMore: number = 10;
+    let nextFirstItemMoreIndex: number =
+      Number(firstItemMoreIndexRef.current) + Number(usersToMore);
+
+    //末端データまで来たら読み込まない
+    console.log("original.current.length: " + original.current.length);
+    console.log(
+      "firstItemMoreIndexRef.current: " + firstItemMoreIndexRef.current
+    );
+    console.log("nextFirstItemMoreIndex: " + nextFirstItemMoreIndex);
+    console.log("START_INDEX: " + START_INDEX);
+
+    //TODO:指定したページで初期化するとリスト末端まで描画してしまうためこのコードでreturn
+    if (START_INDEX > 0) return;
+    if (Number(firstItemMoreIndexRef.current) === original.current.length) {
+      return;
+    }
+    if (original.current.length - 1 < nextFirstItemMoreIndex) {
+      nextFirstItemMoreIndex = original.current.length;
+    }
+    return setTimeout(() => {
+      setFirstItemMoreIndex(() => nextFirstItemMoreIndex);
+      setUsers((users: any) => [
+        ...users,
+        ...original.current.slice(
+          nextFirstItemMoreIndex - usersToMore,
+          nextFirstItemMoreIndex
+        ),
+      ]);
+    }, 200);
+  }, [setUsers]);
+
+  // useEffect(() => {
+  //   const timeout = loadMore();
+  //   return () => clearTimeout(timeout);
+  // }, []);
+
+  return (
+    <Virtuoso
+      style={{ height: "100vw" }}
+      firstItemIndex={firstItemPreIndex}
+      initialTopMostItemIndex={INITIAL_ITEM_COUNT - 1}
+      data={users}
+      startReached={prependItems}
+      endReached={loadMore}
+      // totalCount={original.current.length}
+      totalCount={original.current.length}
+      itemContent={(index, user) => {
         return (
           <Article
             key={uuidv4()}
-            article={article}
+            article={user}
             keyword={props.keyword}
             lawId={props.lawId}
           />
         );
-      })}
-    </>
-  );
-
-  //ロード中に表示する項目
-  const loader = (
-    <div className="loader" key={0}>
-      Loading ...
-    </div>
-  );
-
-  return (
-    <Box>
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
-        hasMore={!isFetching && hasMore} //読み込みを行うかどうかの判定
-        loader={loader}
-      >
-        {aricles} {/* 無限スクロールで表示する項目 */}
-      </InfiniteScroll>
-    </Box>
+      }}
+    />
   );
 };
 
