@@ -193,7 +193,7 @@ export default function MainArea() {
           <Typography variant="h6" noWrap component="div">
             Trams Roppo
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -214,17 +214,24 @@ export default function MainArea() {
                 console.log("条文横断検索　IME END!! 漢字変換が終了しました");
               }}
             />
-          </Search>
+          </Search> */}
 
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl>
-              <InputLabel id="demo-simple-select-label">対象試験</InputLabel>
+          <Box paddingLeft={5}>
+            <FormControl sx={{ minWidth: 180, maxHeight: 50 }}>
+              <InputLabel id="demo-simple-select-label">
+                <span style={{ color: "white" }}>対象試験</span>
+              </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={professionExam}
-                label="Age"
+                label="対象試験"
                 onChange={handleChange}
+                sx={{
+                  color: "white",
+                  outlineColor: "white",
+                  outlineStyle: "solid",
+                }}
               >
                 <MenuItem value={0}>司法試験</MenuItem>
                 <MenuItem value={1}>司法予備試験</MenuItem>
