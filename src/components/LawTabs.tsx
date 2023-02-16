@@ -63,8 +63,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
             })}
           </TabList>
         </Box>
-        <br />
-        <Box>
+        <Box paddingTop={4}>
           {examList?.map((law, index) => {
             return (
               <LawTabPanel
