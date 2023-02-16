@@ -23,6 +23,7 @@ type Props = {
 
 const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   const [keyword, setKeyword] = useState("");
+  const [jumpIndex, setjumpIndex] = useState("");
 
   //dialog 表示テストコード
   const [open, setOpen] = useState(false);
@@ -37,6 +38,11 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   //////
   const sendKeyword = (keyword: string) => {
     setKeyword(keyword);
+  };
+
+  const sendJump = (value: string) => {
+    console.log("sendJump: " + value);
+    setjumpIndex(value);
   };
 
   const extArticleData = getLawCode(targetArticlesID);
@@ -91,7 +97,11 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
         </Button>
       */}
 
-        <ArticleJumpByNumber open={open} onClose={handleClose} />
+        <ArticleJumpByNumber
+          open={open}
+          onClose={handleClose}
+          sendJump={sendJump}
+        />
       </Box>
       <br />
       <br />
@@ -100,6 +110,7 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
         keyword={keyword}
         articles={data}
         lawId={extArticleData.lawId}
+        jumpIndex={jumpIndex}
       />
     </TabPanel>
   );

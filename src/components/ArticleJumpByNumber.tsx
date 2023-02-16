@@ -12,9 +12,14 @@ import { useState } from "react";
 export type ArticleJumpByNumberProps = {
   open: boolean;
   onClose: (value: string) => void;
+  sendJump: (value: string) => void;
 };
 
-const ArticleJumpByNumber = (props: ArticleJumpByNumberProps) => {
+const ArticleJumpByNumber = ({
+  open,
+  onClose,
+  sendJump,
+}: ArticleJumpByNumberProps) => {
   //Popperテストコード
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [articleNumber, setArticleNumber] = useState<string>("");
@@ -32,6 +37,7 @@ const ArticleJumpByNumber = (props: ArticleJumpByNumberProps) => {
   };
   const handleJump = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
+    sendJump(articleNumber);
     console.log("ArticleJumpByNumber.handleJump");
   };
 
@@ -40,8 +46,8 @@ const ArticleJumpByNumber = (props: ArticleJumpByNumberProps) => {
     console.log("ArticleJumpByNumber.handleBack");
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
+  const _open = Boolean(anchorEl);
+  const id = _open ? "simple-popper" : undefined;
 
   //Popperテストコードここまで
 
@@ -52,7 +58,7 @@ const ArticleJumpByNumber = (props: ArticleJumpByNumberProps) => {
           条文番号ジャンプ
         </button>
       </Box>
-      <Popper id={id} open={open} anchorEl={anchorEl}>
+      <Popper id={id} open={_open} anchorEl={anchorEl}>
         <Box
           sx={{
             border: 1,
