@@ -101,14 +101,18 @@ const Articles = (props: any) => {
     }
     return setTimeout(() => {
       setFirstItemMoreIndex(() => nextFirstItemMoreIndex);
-      setUsers((users: any) => [
-        ...users,
-        ...original.current.slice(
-          nextFirstItemMoreIndex - usersToMore,
-          nextFirstItemMoreIndex
-        ),
-      ]);
-    }, 200);
+      setUsers((users: any) => {
+        //苦肉の策 typescriptの空の型がうまく指定できないため
+        users = users.length === INITIAL_ITEM_COUNT ? [] : users;
+        return [
+          ...users,
+          ...original.current.slice(
+            nextFirstItemMoreIndex - usersToMore,
+            nextFirstItemMoreIndex
+          ),
+        ];
+      });
+    }, 100);
   }, [setUsers]);
 
   // useEffect(() => {
