@@ -177,7 +177,14 @@ export default function MainArea() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        overflow: "hidden",
+        scrollbarWidth: "none",
+      }}
+    >
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -313,11 +320,13 @@ export default function MainArea() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <LawTabs
-          key={uuidv4()}
-          keyword={keyword}
-          professionExam={professionExam}
-        />
+        <Box sx={{ height: "93%" }}>
+          <LawTabs
+            key={uuidv4()}
+            keyword={keyword}
+            professionExam={professionExam}
+          />
+        </Box>
       </Main>
     </Box>
   );

@@ -79,7 +79,8 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
         sx={{
           borderBottom: 2,
           borderColor: "divider",
-          width: "100vw",
+          width: "98vw",
+          overflow: "hidden",
           position: "fixed",
           backgroundColor: "azure",
         }}
@@ -97,21 +98,24 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
         </Button>
       */}
 
-        <ArticleJumpByNumber
-          open={open}
-          onClose={handleClose}
-          sendJump={sendJump}
-        />
+        <Box sx={{ display: "inline-block" }}>
+          <ArticleJumpByNumber
+            open={open}
+            onClose={handleClose}
+            sendJump={sendJump}
+          />
+        </Box>
+
+        <Box sx={{ height: "83vh" }}>
+          <Articles
+            key={uuidv4()}
+            keyword={keyword}
+            articles={data}
+            lawId={extArticleData.lawId}
+            jumpIndex={jumpIndex}
+          />
+        </Box>
       </Box>
-      <br />
-      <br />
-      <Articles
-        key={uuidv4()}
-        keyword={keyword}
-        articles={data}
-        lawId={extArticleData.lawId}
-        jumpIndex={jumpIndex}
-      />
     </TabPanel>
   );
 };
