@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import InfiniteScroll from "react-infinite-scroller";
 import { Virtuoso } from "react-virtuoso";
+import { getArticleIndex } from "../util/util";
 
 const Articles = (props: any) => {
   //   const [list, setList] = useState<any[]>([]); //表示するデータ
@@ -23,13 +24,18 @@ const Articles = (props: any) => {
   // const numberOfArticlesPerPage = 10;
 
   // const START_INDEX = 100;
-  const START_INDEX: number = !props.jumpIndex
+
+  const ArticleStartIndex = getArticleIndex(props.lawId, props.jumpIndex);
+  const START_INDEX: number = !ArticleStartIndex
     ? 0
-    : props.jumpIndex >= props.articles.length
+    : ArticleStartIndex >= props.articles.length
     ? props.articles.length - 1
-    : isNaN(props.jumpIndex)
+    : isNaN(ArticleStartIndex)
     ? 0
-    : props.jumpIndex;
+    : ArticleStartIndex + 5 >= props.articles.length //TODO:補正する 上下無限スクロールかつ条文の高さが不定なのでこれでも厳しい
+    ? props.articles.length - 1
+    : ArticleStartIndex + 5;
+
   const INITIAL_ITEM_COUNT = 1;
 
   const original = useRef(props.articles); //データソース
@@ -86,7 +92,7 @@ const Articles = (props: any) => {
     console.log("START_INDEX: " + START_INDEX);
 
     //TODO:指定したページで初期化するとリスト末端まで描画してしまうためこのコードでreturn
-    if (START_INDEX > 0) return;
+    // if (START_INDEX > 0) return;
     if (Number(firstItemMoreIndexRef.current) === original.current.length) {
       return;
     }
