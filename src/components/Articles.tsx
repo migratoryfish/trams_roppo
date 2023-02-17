@@ -112,7 +112,7 @@ const Articles = (props: any) => {
 
   return (
     <Virtuoso
-      style={{ height: "100vw" }}
+      style={{ height: "100%" }}
       firstItemIndex={firstItemPreIndex}
       initialTopMostItemIndex={INITIAL_ITEM_COUNT - 1}
       data={users}
