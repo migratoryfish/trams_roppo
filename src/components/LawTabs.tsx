@@ -35,13 +35,14 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
   };
 
   return (
-    <Box sx={{ width: "100vw", typography: "body1" }}>
+    <Box sx={{ height: "100%", width: "100vw", typography: "body1" }}>
       <TabContext value={selectedTabValue.toString()}>
         <Box
           sx={{
             borderBottom: 1,
             borderColor: "divider",
             width: "100vw",
+            height: "13vh",
             position: "fixed",
             backgroundColor: "white",
           }}
@@ -63,7 +64,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
             })}
           </TabList>
         </Box>
-        <Box paddingTop={4}>
+        <Box paddingTop={4} sx={{ height: "95vh" }}>
           {examList?.map((law, index) => {
             return (
               <LawTabPanel
