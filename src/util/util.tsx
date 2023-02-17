@@ -89,6 +89,27 @@ export const getArticleData = (lawId: string, _lawNo: string) => {
   return art;
 };
 
+//TODO:getArticleDataと統合
+export const getArticleIndex = (lawId: string, _lawNo: string) => {
+  const articles = getLawCode(lawId);
+  const lawNo = Number(_lawNo);
+  console.log("util.getArticleData.lawNo: " + lawNo);
+
+  if (isNaN(lawNo)) {
+    return 0;
+  }
+  //TODO:効率のよい検索方法の実装 もしくはデータ構造
+  let articleIndex = 0;
+  for (let index = 0; index < articles.lawDataArticles.length; index++) {
+    if (articles.lawDataArticles[index].number === lawNo.toString()) {
+      articleIndex = index;
+      break;
+    }
+  }
+  console.log("util.getArticleIndex.articleIndex: " + getArticleIndex);
+  return articleIndex;
+};
+
 //漢数字を数値へ変換する
 export const kanjiNumber2arabiaNumber = (kanjiNumber: string) => {
   let hundredsPlace = 0;
