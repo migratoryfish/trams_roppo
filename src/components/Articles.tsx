@@ -32,10 +32,10 @@ const Articles = (props: any) => {
     ? props.articles.length - 1
     : isNaN(ArticleStartIndex)
     ? 0
-    : ArticleStartIndex + 5 >= props.articles.length //TODO:補正する 上下無限スクロールかつ条文の高さが不定なのでこれでも厳しい
-    ? props.articles.length - 1
-    : ArticleStartIndex + 5;
-
+    : // : ArticleStartIndex + 5 >= props.articles.length //TODO:補正する 上下無限スクロールかつ条文の高さが不定なのでこれでも厳しい
+      // ? props.articles.length - 1
+      // : ArticleStartIndex + 5;
+      ArticleStartIndex;
   const INITIAL_ITEM_COUNT = 1;
 
   const original = useRef(props.articles); //データソース
