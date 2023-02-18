@@ -5,6 +5,14 @@ import kaisyahoArticleData from "../datasource/kaisyaho.json";
 import hudosantoukihoArticleData from "../datasource/hudosantoukiho.json";
 import syogyotoukihoArticleData from "../datasource/syogyotoukiho.json";
 import syakaihokenroumushihoArticleData from "../datasource/syakaihokenroumushi.json";
+import shihousyoshihoArticleData from "../datasource/shihousyoshiho.json";
+import minjisosyouhoArticleData from "../datasource/minjisosyouho.json";
+import minjishikkouhoArticleData from "../datasource/minjishikkouho.json";
+import minjihozenhouArticleData from "../datasource/minjihozenhou.json";
+
+import kyoutakuhoArticleData from "../datasource/kyoutakuho.json";
+import keihoArticleData from "../datasource/keiho.json";
+
 import examList from "../datasource/lawNameInfos.json";
 
 // str: 日付文字列（yyyyMMdd）
@@ -34,6 +42,18 @@ export const getLawCode = (lawId: string) => {
     extArticleData = syogyotoukihoArticleData;
   } else if (lawId === "343AC1000000089") {
     extArticleData = syakaihokenroumushihoArticleData;
+  } else if (lawId === "325AC1000000197") {
+    extArticleData = shihousyoshihoArticleData;
+  } else if (lawId === "401AC0000000091") {
+    extArticleData = minjihozenhouArticleData;
+  } else if (lawId === "354AC0000000004") {
+    extArticleData = minjishikkouhoArticleData;
+  } else if (lawId === "408AC0000000109") {
+    extArticleData = minjisosyouhoArticleData;
+  } else if (lawId === "132AC0000000015") {
+    extArticleData = kyoutakuhoArticleData;
+  } else if (lawId === "140AC0000000045") {
+    extArticleData = keihoArticleData;
   } else {
     extArticleData = kenpoArticleData;
   }
