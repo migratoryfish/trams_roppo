@@ -26,7 +26,9 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
   if (!examList) {
     return (
       <>
-        <Typography variant="h4">現在未実装の試験プリセットです</Typography>
+        <Typography variant="h4">
+          ヘッダのプルダウンメニューから試験を選択してください
+        </Typography>
       </>
     );
   }
