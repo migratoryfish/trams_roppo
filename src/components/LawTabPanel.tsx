@@ -45,6 +45,7 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
     setjumpIndex(value);
   };
 
+  //TODO:ここに法令条文全部を取得するコードを記載する
   const extArticleData = getLawCode(targetArticlesID);
 
   let data = extArticleData.lawDataArticles.flatMap((article) =>

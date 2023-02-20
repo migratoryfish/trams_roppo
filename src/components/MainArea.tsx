@@ -138,10 +138,10 @@ export default function MainArea() {
   );
   const { isPopUpArticle, setIsPopUpArticle } = useContext(PopUpArticleContext);
   //select(プルダウン)用テストコードS
-  const [professionExam, setProfessionExam] = useState("");
+  const [professionExam, setProfessionExam] = useState(0);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setProfessionExam(event.target.value);
+    setProfessionExam(Number(event.target.value));
   };
   //select(プルダウン)用テストコードE
 
@@ -231,7 +231,7 @@ export default function MainArea() {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={professionExam}
+                value={professionExam.toString()}
                 label="対象試験"
                 onChange={handleChange}
                 sx={{
@@ -240,30 +240,16 @@ export default function MainArea() {
                   outlineStyle: "solid",
                 }}
               >
-                <MenuItem disabled value={0}>
-                  司法試験
-                </MenuItem>
-                <MenuItem disabled value={1}>
-                  司法予備試験
-                </MenuItem>
+                <MenuItem value={0}>司法試験</MenuItem>
+                <MenuItem value={1}>司法予備試験</MenuItem>
                 <MenuItem value={2}>司法書士試験</MenuItem>
-                <MenuItem disabled value={3}>
-                  弁理士試験
-                </MenuItem>
-                <MenuItem disabled value={4}>
-                  税理士試験
-                </MenuItem>
-                <MenuItem disabled value={5}>
-                  社会保険労務士試験
-                </MenuItem>
+                <MenuItem value={3}>弁理士試験</MenuItem>
+                <MenuItem value={4}>税理士試験</MenuItem>
+                <MenuItem value={5}>社会保険労務士試験</MenuItem>
                 <MenuItem value={6}>行政書士試験</MenuItem>
-                <MenuItem disabled value={7}>
-                  土地家屋調査士試験
-                </MenuItem>
-                <MenuItem disabled value={8}>
-                  海事代理士試験
-                </MenuItem>
-                <MenuItem value={5}>カッコ多重ハイライト技術デモ</MenuItem>
+                <MenuItem value={7}>土地家屋調査士試験</MenuItem>
+                <MenuItem value={8}>海事代理士試験</MenuItem>
+                <MenuItem value={9}>カッコ多重ハイライト技術デモ</MenuItem>
               </Select>
             </FormControl>
           </Box>
