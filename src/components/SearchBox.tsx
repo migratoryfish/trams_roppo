@@ -4,6 +4,7 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRef, useState } from "react";
+import { Clear } from "@mui/icons-material";
 
 type Props = {
   placeholder: string;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const SearchBox: React.FC<Props> = ({ placeholder, sendKeyword, keyword }) => {
+  const [inputKeyWord, setInputKeyWord] = useState<string>("");
   // 現在 IME ON（変換中）かどうかのフラグ
   const isImeOn = useRef(false);
   const handleSearchInput = (inputValue: string) => {
@@ -26,12 +28,13 @@ const SearchBox: React.FC<Props> = ({ placeholder, sendKeyword, keyword }) => {
   };
 
   return (
-    <Paper sx={{ p: "2px 4px", alignItems: "flex-end", width: 300 }}>
+    <Paper sx={{ p: "2px 4px", alignItems: "flex-end" }}>
       <SearchIcon />
       <InputBase
         sx={{ ml: 1, flex: 1 }}
         placeholder={placeholder}
         onChange={(e) => {
+          setInputKeyWord(e.target.value);
           handleSearchInput(e.target.value);
         }}
         onCompositionStart={() => {
@@ -46,8 +49,18 @@ const SearchBox: React.FC<Props> = ({ placeholder, sendKeyword, keyword }) => {
           handleSearchInput((event?.target as HTMLInputElement).value); //入力が確定したとき
           console.log("条文内検索　IME END!! 漢字変換が終了しました");
         }}
-        defaultValue={keyword}
+        // defaultValue={keyword}
+        value={inputKeyWord}
       />
+      <IconButton
+        onClick={() => {
+          setInputKeyWord("");
+          sendKeyword("");
+        }}
+        aria-label="clear"
+      >
+        <Clear />
+      </IconButton>
     </Paper>
   );
 };
