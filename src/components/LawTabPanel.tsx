@@ -53,6 +53,7 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
 
   //TODO:ここに法令条文全部を取得するコードを記載する
   const extArticleData = getLawCode(targetArticlesID);
+  const maxArticleNumberIndex = extArticleData.lawDataArticles.at(-1)?.number;
 
   let data = extArticleData.lawDataArticles.flatMap((article) =>
     article.paragraphs.some(
@@ -104,7 +105,18 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
           Open simple dialog
         </Button>
       */}
-
+        <Box paddingRight={5} sx={{ display: "inline-block" }}>
+          <Typography
+            variant="h6"
+            paddingRight={2}
+            sx={{ display: "inline-block" }}
+          >
+            {"条文総数: " + data.length}
+          </Typography>
+          <Typography variant="h6" sx={{ display: "inline-block" }}>
+            {"末端条文番号: " + maxArticleNumberIndex}
+          </Typography>
+        </Box>
         <Box sx={{ display: "inline-block" }}>
           <ArticleJumpByNumber
             open={open}
