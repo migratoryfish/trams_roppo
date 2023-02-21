@@ -168,9 +168,15 @@ export default function MainArea() {
   };
 
   const handleDrawerClose = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.currentTarget.textContent === "カッコハイライト") {
+    if (event.currentTarget.textContent?.includes("カッコハイライト")) {
+      event.currentTarget.textContent = !isBracketHighLight
+        ? "現在:カッコハイライト機能ON"
+        : "現在:カッコハイライト機能OFF";
       setIsBracketHighLight(!isBracketHighLight);
-    } else if (event.currentTarget.textContent === "条文ポップアップ") {
+    } else if (event.currentTarget.textContent?.includes("条文ポップアップ")) {
+      event.currentTarget.textContent = !isPopUpArticle
+        ? "現在:条文ポップアップ機能ON"
+        : "現在:条文ポップアップ機能OFF";
       setIsPopUpArticle(!isPopUpArticle);
     }
     setOpen(false);
@@ -281,12 +287,12 @@ export default function MainArea() {
         <List>
           {[
             "横断検索(実装予定)",
-            "カッコハイライトon/off",
-            "条文ポップアップon/off",
+            "現在:カッコハイライト機能ON",
+            "現在:条文ポップアップ機能ON",
           ].map((text, index) => (
             <ListItem key={text} disablePadding value={index}>
               <ListItemButton onClick={handleDrawerClose}>
-                <ListItemIcon>{<Lens />}</ListItemIcon>
+                {/* <ListItemIcon>{<Lens />}</ListItemIcon> */}
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
