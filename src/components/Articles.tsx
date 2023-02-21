@@ -25,7 +25,8 @@ const Articles = (props: any) => {
 
   // const START_INDEX = 100;
 
-  const ArticleStartIndex = getArticleIndex(props.lawId, props.jumpIndex);
+  // const ArticleStartIndex = getArticleIndex(props.lawId, props.jumpIndex);
+  const ArticleStartIndex = props.jumpIndex;
   const START_INDEX: number = !ArticleStartIndex
     ? 0
     : ArticleStartIndex >= props.articles.length
