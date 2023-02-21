@@ -1,15 +1,18 @@
-import { Tooltip, Typography } from "@mui/material";
+import { Box, Tooltip, Typography } from "@mui/material";
 import { FC } from "react";
 import { LinearGradient } from "react-text-gradients";
 import PopUp from "./PopUp";
 import { useContext } from "react";
 import { PopUpArticleContext } from "../libs/SettingContext";
-
+import Highlighter from "react-highlight-words";
+import SearchIngTextHighLighter from "./SearchIngTextHighLighter";
 type Props = {
   str: string;
   lawId: string;
+  keyWord: string;
 };
-const ArticlePopUpBase: FC<Props> = ({ str, lawId }) => {
+const ArticlePopUpBase: FC<Props> = ({ str, lawId, keyWord }) => {
+  console.log("ArticlePopUpBase.keyWord" + keyWord);
   console.log("ReturnToken.lawId: " + lawId);
   const reg = new RegExp("(第.{1,5}条)");
   const splitedStr = str.split(reg);
@@ -25,16 +28,34 @@ const ArticlePopUpBase: FC<Props> = ({ str, lawId }) => {
 
   const { isPopUpArticle, setIsPopUpArticle } = useContext(PopUpArticleContext);
   if (!isPopUpArticle) {
-    return <>{str}</>;
+    // return <>{str}</>;
+    return (
+      <Box component="span">
+        <SearchIngTextHighLighter textToHighlight={str} keyWord={keyWord} />
+      </Box>
+    );
   } else if (splitedStr.length === 1) {
-    return <>{str}</>;
+    // return <>{str}</>;
+    return (
+      <Box component="span">
+        <SearchIngTextHighLighter textToHighlight={str} keyWord={keyWord} />
+      </Box>
+    );
   } else {
     return (
       <>
         {pg.map((token, index: number, pg) => {
           return (
             <>
-              {token.text}
+              {/* {token.text} */}
+              <SearchIngTextHighLighter
+                textToHighlight={token.text}
+                keyWord={keyWord}
+              />
+              {/* <SearchIngTextHighLighter
+                textToHighlight={token.text}
+                keyWord={keyWord}
+              /> */}
 
               <Tooltip
                 title={
@@ -46,7 +67,7 @@ const ArticlePopUpBase: FC<Props> = ({ str, lawId }) => {
                 arrow
               >
                 <Typography sx={{ display: "inline-block" }}>
-                  <LinearGradient gradient={["to left", "#17acff ,#ff68f0"]}>
+                  <LinearGradient gradient={["to left", "#ff0000 ,#ff0000"]}>
                     {token.match}
                   </LinearGradient>
                 </Typography>

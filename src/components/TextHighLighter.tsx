@@ -7,10 +7,17 @@ type Props = {
   color?: string;
   level?: number;
   lawId: string;
+  keyWord?: string;
 };
 
 const TextHighLighter: FC<Props> = (props: Props) => {
-  const { textToHighlight, color = "#FFFF00", level = -1, lawId } = props;
+  const {
+    textToHighlight,
+    color = "#FFFF00",
+    level = -1,
+    lawId,
+    keyWord = "",
+  } = props;
 
   const style =
     level < 0
@@ -25,7 +32,7 @@ const TextHighLighter: FC<Props> = (props: Props) => {
         background: style,
       }}
     >
-      <ArticlePopUpBase str={textToHighlight} lawId={lawId} />
+      <ArticlePopUpBase str={textToHighlight} lawId={lawId} keyWord={keyWord} />
     </Box>
   );
 };

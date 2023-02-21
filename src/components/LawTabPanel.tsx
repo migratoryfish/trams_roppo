@@ -55,6 +55,8 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   const extArticleData = getLawCode(targetArticlesID);
   const maxArticleNumberIndex = extArticleData.lawDataArticles.at(-1)?.number;
 
+  //TODO:keywordが空ならそもそもこのループを走らせないこと
+  //TODO:号配下の文字列も検索対象にするか? 処理速度との絡み
   let data = extArticleData.lawDataArticles.flatMap((article) =>
     article.paragraphs.some(
       (paragraph) =>
