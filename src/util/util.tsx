@@ -61,28 +61,28 @@ export const getLawCode = (lawId: string) => {
   return extArticleData;
 };
 
-export const getExamList = (profession: string) => {
+export const getExamList = (profession: number) => {
   switch (profession) {
-    case "0": //司法試験
+    case 0: //司法試験
       break;
-    case "1": //司法予備試験
+    case 1: //司法予備試験
       break;
-    case "2": //司法書士試験
+    case 2: //司法書士試験
       return examList.Shihoshoshi;
       break;
-    case "3": //弁理士試験
+    case 3: //弁理士試験
       break;
-    case "4": //税理士試験;
+    case 4: //税理士試験;
       break;
-    case "5": //社会保険労務士試験
+    case 5: //社会保険労務士試験
       return examList.Syakaihokenroumushi;
       break;
-    case "6": //行政書士試験
+    case 6: //行政書士試験
       return examList.Gyoseishoshi;
       break;
-    case "7": //土地家屋調査士試験
+    case 7: //土地家屋調査士試験
       break;
-    case "8": //海事代理士試験
+    case 8: //海事代理士試験
       break;
     default:
       console.log("想定外な士業試験です:professionNumber: " + profession);
@@ -112,7 +112,14 @@ export const getArticleData = (lawId: string, _lawNo: string) => {
 //TODO:getArticleDataと統合
 export const getArticleIndex = (lawId: string, _lawNo: string) => {
   const articles = getLawCode(lawId);
-  const lawNo = Number(_lawNo);
+
+  const lawNos = _lawNo.split("の");
+  //"の"が2つ以上含まれている場合 tokenは3つ
+  if (lawNos.length >= 3) {
+    return 0;
+  }
+  //先頭の条文番号を取得
+  const lawNo = Number(lawNos[0]);
   console.log("util.getArticleData.lawNo: " + lawNo);
 
   if (isNaN(lawNo)) {
@@ -126,7 +133,14 @@ export const getArticleIndex = (lawId: string, _lawNo: string) => {
       break;
     }
   }
-  console.log("util.getArticleIndex.articleIndex: " + getArticleIndex);
+  console.log("util.getArticleIndex.articleIndex: " + articleIndex);
+
+  //後半の条文番号があれば取得して加算する
+  //TODO:"の"が存在しない条文が後に続いた場合意図した条文に飛ばない
+  if (lawNos[1]) {
+    articleIndex += Number(lawNos[1]) - 1;
+  }
+
   return articleIndex;
 };
 
