@@ -33,27 +33,28 @@ interface TabPanelProps {
 
 const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
   const [selectedTabValue, setSelectedTabValu] = React.useState(0);
-  //TODO:ここをAPIを叩くコードに修正すること
-  //useSWRを使用すること
-  // const examList = getExamList(professionExam.toString());
+  let examList;
+  if (import.meta.env.MODE === "development") {
+    examList = getExamList(professionExam);
+  } else if (import.meta.env.MODE === "production") {
+    const exam = examScopeOfProsKey[professionExam];
+    console.log("あなたの選んだ試験範囲は : exam: " + exam);
+    const { data, error, isLoading } = useSWR(
+      `https://tr-rest-api.vercel.app/api/examScopeOfPro/${exam}`,
+      fetcher
+    );
+    if (error) {
+      console.log("error!: " + error);
+    }
 
-  // const exam = professionExam != -1 ? examScopeOfProsKey[professionExam] : "";
-  const exam = examScopeOfProsKey[professionExam];
-  console.log("あなたの選んだ試験範囲は : exam: " + exam);
-  const { data, error, isLoading } = useSWR(
-    `https://tr-rest-api.vercel.app/api/examScopeOfPro/${exam}`,
-    fetcher
-  );
-
-  if (error) {
-    console.log("error!: " + error);
+    examList = data;
   }
-  //if(!examList) {}
-  if (!data) {
+  if (!examList) {
     return (
       <>
         <Typography variant="h4">
-          ヘッダのプルダウンメニューから試験を選択してください
+          {/* ヘッダのプルダウンメニューから試験を選択してください */}
+          {import.meta.env.VITE_SAMPLE_WORD}
         </Typography>
       </>
     );
@@ -82,7 +83,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
             scrollButtons="auto"
           >
             {/* {examList?.map((law, index) => { */}
-            {data?.map((law: any, index: number) => {
+            {examList?.map((law: any, index: number) => {
               return (
                 <Tab
                   key={uuidv4()}
@@ -95,7 +96,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
         </Box>
         <Box paddingTop={4} sx={{ height: "95vh" }}>
           {/* {examList?.map((law, index) => { */}
-          {data?.map((law: any, index: number) => {
+          {examList?.map((law: any, index: number) => {
             return (
               <LawTabPanel
                 key={uuidv4()}
