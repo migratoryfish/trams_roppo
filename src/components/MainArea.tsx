@@ -280,14 +280,9 @@ export default function MainArea() {
         <Divider />
         <List>
           {[
-            "試験範囲横断検索",
-            "カッコハイライト",
-            "条文ポップアップ",
-            "素晴らしい機能",
-            "唯一無二な機能",
-            "地味だけど良い機能",
-            "渋い機能",
-            "おいしい機能",
+            "横断検索(実装予定)",
+            "カッコハイライトon/off",
+            "条文ポップアップon/off",
           ].map((text, index) => (
             <ListItem key={text} disablePadding value={index}>
               <ListItemButton onClick={handleDrawerClose}>
@@ -299,7 +294,7 @@ export default function MainArea() {
         </List>
         <Divider />
         <List>
-          {["Guest", "設定", "ヘルプ"].map((text, index) => (
+          {["アカウント", "設定", "ヘルプ"].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
