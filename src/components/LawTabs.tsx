@@ -54,7 +54,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
       <>
         <Typography variant="h4">
           {/* ヘッダのプルダウンメニューから試験を選択してください */}
-          {import.meta.env.VITE_SAMPLE_WORD}
+          {import.meta.env.VITE_LOADING_WORD}
         </Typography>
       </>
     );
