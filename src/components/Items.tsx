@@ -16,6 +16,7 @@ const Item = (props: any) => {
               <BracketHighLighter
                 bracketToHighlight={item}
                 lawId={props.lawId}
+                keyWord={props.keyword}
               />
               <br />
             </React.Fragment>

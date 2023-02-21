@@ -5,6 +5,7 @@ const PopUpParagraph = (props: any) => {
     <BracketHighLighter
       bracketToHighlight={props.paragraph}
       lawId={props.lawId}
+      keyWord={props.keyword}
     />
   );
 };
