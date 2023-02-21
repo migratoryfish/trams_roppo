@@ -8,17 +8,20 @@ import {
 } from "@mui/material";
 import { Backspace, ReplyAll } from "@mui/icons-material";
 import { useState } from "react";
+import { getArticleIndex } from "../util/util";
 
 export type ArticleJumpByNumberProps = {
   open: boolean;
   onClose: (value: string) => void;
   sendJump: (value: string) => void;
+  lawId: string;
 };
 
 const ArticleJumpByNumber = ({
   open,
   onClose,
   sendJump,
+  lawId,
 }: ArticleJumpByNumberProps) => {
   //Popperテストコード
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -37,7 +40,9 @@ const ArticleJumpByNumber = ({
   };
   const handleJump = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    sendJump(articleNumber);
+    const strarticleNumber = getArticleIndex(lawId, articleNumber).toString();
+    // sendJump(articleNumber);
+    sendJump(strarticleNumber);
     console.log("ArticleJumpByNumber.handleJump");
   };
 
