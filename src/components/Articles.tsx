@@ -93,7 +93,7 @@ const Articles = (props: any) => {
     console.log("START_INDEX: " + START_INDEX);
 
     //TODO:指定したページで初期化するとリスト末端まで描画してしまうためこのコードでreturn
-    // if (START_INDEX > 0) return;
+    if (START_INDEX > 0) return;
     if (Number(firstItemMoreIndexRef.current) === original.current.length) {
       return;
     }
