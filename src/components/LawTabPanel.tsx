@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useEffect, useLayoutEffect, useState } from "react";
 import { TabPanel } from "@mui/lab";
 import SearchBox from "./SearchBox";
 import Articles from "./Articles";
@@ -24,6 +24,11 @@ type Props = {
 const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   const [keyword, setKeyword] = useState("");
   const [jumpIndex, setjumpIndex] = useState("");
+  useEffect(() => {
+    return () => {
+      setKeyword("");
+    };
+  }, [jumpIndex]);
 
   //dialog 表示テストコード
   const [open, setOpen] = useState(false);
