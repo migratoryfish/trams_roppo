@@ -9,8 +9,9 @@ import {
   Grid,
   Popper,
   TextField,
+  Typography,
 } from "@mui/material";
-import { getLawCode } from "../util/util";
+import { getArticleIndex, getLawCode } from "../util/util";
 import ArticleJumpByNumber from "./ArticleJumpByNumber";
 import { ReplyAll } from "@mui/icons-material";
 import { flexbox } from "@mui/system";
@@ -109,16 +110,22 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
             open={open}
             onClose={handleClose}
             sendJump={sendJump}
+            lawId={extArticleData.lawId}
           />
         </Box>
-
+        <Box sx={{ display: "inline-block" }}>
+          <Typography>
+            {Number(jumpIndex) != -1 ? "" : "条文がみつかりませんでした。"}
+          </Typography>
+        </Box>
         <Box sx={{ height: "83vh" }}>
           <Articles
             key={uuidv4()}
             keyword={keyword}
             articles={data}
             lawId={extArticleData.lawId}
-            jumpIndex={jumpIndex}
+            jumpIndex={Number(jumpIndex) != -1 ? jumpIndex : "0"}
+            // jumpIndex={getArticleIndex(extArticleData.lawId, jumpIndex)}
           />
         </Box>
       </Box>

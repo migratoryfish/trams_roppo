@@ -116,17 +116,17 @@ export const getArticleIndex = (lawId: string, _lawNo: string) => {
   const lawNos = _lawNo.split("の");
   //"の"が2つ以上含まれている場合 tokenは3つ
   if (lawNos.length >= 3) {
-    return 0;
+    return -1;
   }
   //先頭の条文番号を取得
   const lawNo = Number(lawNos[0]);
   console.log("util.getArticleData.lawNo: " + lawNo);
 
   if (isNaN(lawNo)) {
-    return 0;
+    return -1;
   }
   //TODO:効率のよい検索方法の実装 もしくはデータ構造
-  let articleIndex = 0;
+  let articleIndex = -1;
   for (let index = 0; index < articles.lawDataArticles.length; index++) {
     if (articles.lawDataArticles[index].number === lawNo.toString()) {
       articleIndex = index;
