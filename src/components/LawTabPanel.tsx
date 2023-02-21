@@ -132,7 +132,7 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
             {Number(jumpIndex) != -1 ? "" : "条文がみつかりませんでした。"}
           </Typography>
         </Box>
-        <Box sx={{ height: "83vh" }}>
+        <Box sx={{ height: "82vh" }}>
           <Articles
             key={uuidv4()}
             keyword={keyword}
