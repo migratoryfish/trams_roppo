@@ -26,7 +26,7 @@ import {
 } from "@mui/icons-material";
 import LawTabs from "./LawTabs";
 import InputBase from "@mui/material/InputBase";
-import { useContext, useRef, useState } from "react";
+import { useContext, useMemo, useRef, useState } from "react";
 import {
   FormControl,
   Hidden,
@@ -323,11 +323,16 @@ export default function MainArea() {
       <Main open={open}>
         <DrawerHeader />
         <Box sx={{ height: "93%" }}>
-          <LawTabs
-            key={uuidv4()}
-            keyword={keyword}
-            professionExam={professionExam}
-          />
+          {useMemo(
+            () => (
+              <LawTabs
+                key={uuidv4()}
+                keyword={keyword}
+                professionExam={professionExam}
+              />
+            ),
+            [professionExam]
+          )}
         </Box>
       </Main>
     </Box>
