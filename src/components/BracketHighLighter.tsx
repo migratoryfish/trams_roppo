@@ -8,6 +8,7 @@ import { BracketHighLightContext } from "../libs/SettingContext";
 type Props = {
   bracketToHighlight: string;
   lawId: string;
+  keyWord: string;
 };
 
 type BracketHighLSet = {
@@ -15,7 +16,11 @@ type BracketHighLSet = {
   level: number;
 };
 
-const BracketHighLighter: FC<Props> = ({ bracketToHighlight, lawId }) => {
+const BracketHighLighter: FC<Props> = ({
+  bracketToHighlight,
+  lawId,
+  keyWord,
+}) => {
   const { isBracketHighLight, setIsBracketHighLight } = useContext(
     BracketHighLightContext
   );
@@ -34,13 +39,21 @@ const BracketHighLighter: FC<Props> = ({ bracketToHighlight, lawId }) => {
   if (splitOpenBrackets.length !== splitCloseBrackets.length) {
     return (
       <Box component="span">
-        <TextHighLighter textToHighlight={bracketToHighlight} lawId={lawId} />
+        <TextHighLighter
+          textToHighlight={bracketToHighlight}
+          lawId={lawId}
+          keyWord={keyWord}
+        />
       </Box>
     );
     //カッコが無ければこの時点でカッコハイライト処理中断
   } else if (splitOpenBrackets.length === 1) {
     <Box component="span">
-      <TextHighLighter textToHighlight={bracketToHighlight} lawId={lawId} />
+      <TextHighLighter
+        textToHighlight={bracketToHighlight}
+        lawId={lawId}
+        keyWord={keyWord}
+      />
     </Box>;
   }
 
@@ -85,6 +98,7 @@ const BracketHighLighter: FC<Props> = ({ bracketToHighlight, lawId }) => {
             textToHighlight={token.token}
             level={token.level}
             lawId={lawId}
+            keyWord={keyWord}
           />
         );
       })}
