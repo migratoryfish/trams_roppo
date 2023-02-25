@@ -26,6 +26,7 @@ const ArticleJumpByNumber = ({
   //Popperテストコード
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [articleNumber, setArticleNumber] = useState<string>("");
+  const strarticleNumber = getArticleIndex(lawId, articleNumber).toString();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setArticleNumber("");
@@ -40,7 +41,7 @@ const ArticleJumpByNumber = ({
   };
   const handleJump = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    const strarticleNumber = getArticleIndex(lawId, articleNumber).toString();
+    // const strarticleNumber = getArticleIndex(lawId, articleNumber).toString(); //中でuseSWRフック呼び出し/フックルール違反
     // sendJump(articleNumber);
     sendJump(strarticleNumber);
     console.log("ArticleJumpByNumber.handleJump");
