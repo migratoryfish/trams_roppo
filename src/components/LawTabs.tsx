@@ -41,7 +41,12 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
     console.log("あなたの選んだ試験範囲は : exam: " + exam);
     const { data, error, isLoading } = useSWR(
       `https://tr-rest-api.vercel.app/api/examScopeOfPro/${exam}`,
-      fetcher
+      fetcher,
+      {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+      }
     );
     if (error) {
       console.log("error!: " + error);

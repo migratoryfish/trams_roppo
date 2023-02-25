@@ -21,6 +21,9 @@ type Props = {
   value: string;
   //children?: ReactNode; 子要素(タグで囲まれた要素)がある場合記述すること
 };
+import useSWR from "swr";
+import axios from "axios";
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   const [keyword, setKeyword] = useState("");
@@ -52,14 +55,39 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   };
 
   //TODO:ここに法令条文全部を取得するコードを記載する
-  const extArticleData = getLawCode(targetArticlesID);
-  const maxArticleNumberIndex = extArticleData.lawDataArticles.at(-1)?.number;
+  let extArticleData;
+  if (import.meta.env.MODE === "development") {
+    extArticleData = getLawCode(targetArticlesID);
+  } else if (import.meta.env.MODE === "production") {
+    console.log("production.LawTabPanel.targetArticlesID" + targetArticlesID);
+    const { data, error, isLoading } = useSWR(
+      `https://tr-rest-api.vercel.app/api/lawArticles3/${targetArticlesID}`,
+      fetcher,
+      {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+      }
+    );
+    if (error) {
+      console.log("error!: " + error);
+      return <TabPanel value={value.toString()}>エラーです…</TabPanel>;
+    }
+    if (isLoading) {
+      console.log("isLoading!: " + isLoading);
+      return <TabPanel value={value.toString()}>Loading中です…</TabPanel>;
+    }
+
+    extArticleData = data[0];
+  }
+
+  const maxArticleNumberIndex = extArticleData.lawDataArticles?.at(-1)?.number;
 
   //TODO:keywordが空ならそもそもこのループを走らせないこと
   //TODO:号配下の文字列も検索対象にするか? 処理速度との絡み
-  let data = extArticleData.lawDataArticles.flatMap((article) =>
+  let data = extArticleData.lawDataArticles?.flatMap((article: any) =>
     article.paragraphs.some(
-      (paragraph) =>
+      (paragraph: any) =>
         //!keyword ? true : paragraph.sentence.search(`/${keyword}/g`)
         //someではなく処理速度的にfindのほうがよいか?
         //ToDo:要検討
