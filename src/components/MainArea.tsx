@@ -204,7 +204,7 @@ export default function MainArea() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Trams Roppo
+            Trams Roppo Beta
           </Typography>
           {/* <Search>
             <SearchIconWrapper>
@@ -300,24 +300,26 @@ export default function MainArea() {
         </List>
         <Divider />
         <List>
-          {["アカウント", "設定", "ヘルプ"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index === 0 ? (
-                    <Person />
-                  ) : index === 1 ? (
-                    <SettingsApplications />
-                  ) : index === 2 ? (
-                    <HelpOutline />
-                  ) : (
-                    <Warning />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {["アカウント(実装予定)", "設定(実装予定)", "ヘルプ(実装予定)"].map(
+            (text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index === 0 ? (
+                      <Person />
+                    ) : index === 1 ? (
+                      <SettingsApplications />
+                    ) : index === 2 ? (
+                      <HelpOutline />
+                    ) : (
+                      <Warning />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
       <Main open={open}>
