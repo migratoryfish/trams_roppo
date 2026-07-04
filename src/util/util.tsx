@@ -154,23 +154,39 @@ export const findArticleIndex = (articles: any, _lawNo: string) => {
 
 //漢数字を数値へ変換する
 export const kanjiNumber2arabiaNumber = (kanjiNumber: string) => {
+  let thousandsPlace = 0;
   let hundredsPlace = 0;
   let tensPlace = 0;
   let onesPlace = 0;
+  let temp0 = "";
   let temp = "";
 
-  //漢数字sに百が含まれていない場合
-  if (kanjiNumber.indexOf("百") === -1) {
+  //漢数字に千が含まれていない場合
+  if (kanjiNumber.indexOf("千") === -1) {
+    thousandsPlace = 0;
+    temp0 = kanjiNumber.slice(0);
+  } else if (kanjiNumber.indexOf("千") === 0) {
+    //漢数字の先頭に千が含まれている場合
+    thousandsPlace = 1000;
+    temp0 = kanjiNumber.slice(1);
+  } else if (kanjiNumber.indexOf("千") === 1) {
+    //漢数字の2文字目に千が含まれている場合
+    thousandsPlace = kanjiToken2arabiaToken(kanjiNumber.charAt(0)) * 1000;
+    temp0 = kanjiNumber.slice(2);
+  }
+
+  //漢数字に百が含まれていない場合
+  if (temp0.indexOf("百") === -1) {
     hundredsPlace = 0;
-    temp = kanjiNumber.slice(0);
-  } else if (kanjiNumber.indexOf("百") === 0) {
-    //漢数字sの先頭に百が含まれている場合
+    temp = temp0.slice(0);
+  } else if (temp0.indexOf("百") === 0) {
+    //漢数字の先頭に百が含まれている場合
     hundredsPlace = 100;
-    temp = kanjiNumber.slice(1);
-  } else if (kanjiNumber.indexOf("百") === 1) {
-    //漢数字sの2文字目に百が含まれている場合
-    hundredsPlace = kanjiToken2arabiaToken(kanjiNumber.charAt(0)) * 100;
-    temp = kanjiNumber.slice(2);
+    temp = temp0.slice(1);
+  } else if (temp0.indexOf("百") === 1) {
+    //漢数字の2文字目に百が含まれている場合
+    hundredsPlace = kanjiToken2arabiaToken(temp0.charAt(0)) * 100;
+    temp = temp0.slice(2);
   }
 
   let temp2 = "";
@@ -189,7 +205,7 @@ export const kanjiNumber2arabiaNumber = (kanjiNumber: string) => {
     onesPlace = kanjiToken2arabiaToken(temp2);
   }
 
-  return hundredsPlace + tensPlace + onesPlace;
+  return thousandsPlace + hundredsPlace + tensPlace + onesPlace;
 };
 
 //漢数字1文字を数値へ変換します
@@ -228,6 +244,9 @@ export const kanjiToken2arabiaToken = (ktoken: string) => {
       break;
     case "百":
       atoken = 100;
+      break;
+    case "千":
+      atoken = 1000;
       break;
     default:
       atoken = 0;
