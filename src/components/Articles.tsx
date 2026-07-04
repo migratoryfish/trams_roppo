@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import InfiniteScroll from "react-infinite-scroller";
 import { Virtuoso } from "react-virtuoso";
-import { getArticleIndex } from "../util/util";
 
 const Articles = (props: any) => {
   //   const [list, setList] = useState<any[]>([]); //表示するデータ

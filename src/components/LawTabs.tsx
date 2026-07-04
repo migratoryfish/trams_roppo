@@ -4,19 +4,8 @@ import { Box } from "@mui/material";
 import { FC, ReactNode } from "react";
 import LawTabPanel from "./LawTabPanel";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { getExamList } from "../util/util";
 import { v4 as uuidv4 } from "uuid";
-import useSWR from "swr";
-import axios from "axios";
-import { examScopeOfProsKey } from "../libs/examScopeOfProsKey";
-// axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-
-// axios({
-//   headers: {
-//     "Content-Type": "application/x-www-form-urlencoded",
-//   },
-// });
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+import { useExamList } from "../libs/useLawData";
 
 type Props = {
   //color: string;
@@ -33,26 +22,10 @@ interface TabPanelProps {
 
 const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
   const [selectedTabValue, setSelectedTabValu] = React.useState(0);
-  let examList;
-  if (import.meta.env.MODE === "development") {
-    examList = getExamList(professionExam);
-  } else if (import.meta.env.MODE === "production") {
-    const exam = examScopeOfProsKey[professionExam];
-    console.log("あなたの選んだ試験範囲は : exam: " + exam);
-    const { data, error, isLoading } = useSWR(
-      `https://tr-rest-api.vercel.app/api/examScopeOfPro/${exam}`,
-      fetcher,
-      {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-      }
-    );
-    if (error) {
-      console.log("error!: " + error);
-    }
-
-    examList = data;
+  //フックは条件分岐の外で常に呼び出す(フックのルール)
+  const { examList, error } = useExamList(professionExam);
+  if (error) {
+    console.log("error!: " + error);
   }
   if (!examList) {
     return (
