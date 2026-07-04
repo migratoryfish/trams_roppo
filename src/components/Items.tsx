@@ -1,7 +1,6 @@
 import Typography from "@mui/material/Typography";
 import React from "react";
 import Highlighter from "react-highlight-words";
-import { v4 as uuidv4 } from "uuid";
 import BracketHighLighter from "./BracketHighLighter";
 const Item = (props: any) => {
   return (
@@ -12,7 +11,7 @@ const Item = (props: any) => {
         })
         .map((item: any, index: number) => {
           return (
-            <React.Fragment key={uuidv4()}>
+            <React.Fragment key={index}>
               <BracketHighLighter
                 bracketToHighlight={item}
                 lawId={props.lawId}

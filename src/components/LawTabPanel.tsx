@@ -14,7 +14,6 @@ import {
 import ArticleJumpByNumber from "./ArticleJumpByNumber";
 import { ReplyAll } from "@mui/icons-material";
 import { flexbox } from "@mui/system";
-import { v4 as uuidv4 } from "uuid";
 import { useLawArticles } from "../libs/useLawData";
 type Props = {
   targetArticlesID: string;
@@ -146,8 +145,9 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
           </Typography>
         </Box>
         <Box sx={{ height: "82vh" }}>
+          {/* keywordまたはjumpIndexが変わったときだけ再マウントする(Virtuosoの表示位置を初期化するため) */}
           <Articles
-            key={uuidv4()}
+            key={`${keyword}_${jumpIndex}`}
             keyword={keyword}
             articles={data}
             lawId={extArticleData.lawId}
