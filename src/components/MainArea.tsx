@@ -151,7 +151,6 @@ export default function MainArea() {
   const isImeOn = useRef(false);
 
   const handleSearchInput = (value: string) => {
-    console.log("条文横断検索　検索ボックスの値が変化しました");
     if (keyword === value) return;
     if (value === "") {
       // Chrome ではテキストクリア時に onCompositionEnd が呼ばれないことがある
