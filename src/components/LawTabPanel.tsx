@@ -46,7 +46,6 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
   };
 
   const sendJump = (value: string) => {
-    console.log("sendJump: " + value);
     setjumpIndex(value);
   };
 
@@ -58,7 +57,7 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
     isLoading,
   } = useLawArticles(targetArticlesID);
   if (error) {
-    console.log("error!: " + error);
+    console.error("条文データの取得に失敗しました: " + error);
     return <TabPanel value={value.toString()}>エラーです…</TabPanel>;
   }
   if (isLoading || !extArticleData) {

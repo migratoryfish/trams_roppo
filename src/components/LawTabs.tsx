@@ -24,7 +24,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
   //フックは条件分岐の外で常に呼び出す(フックのルール)
   const { examList, error } = useExamList(professionExam);
   if (error) {
-    console.log("error!: " + error);
+    console.error("試験範囲の取得に失敗しました: " + error);
   }
   if (!examList) {
     return (

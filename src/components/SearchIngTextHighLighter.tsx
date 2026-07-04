@@ -13,8 +13,6 @@ type HighlightToken = {
 
 const SearchIngTextHighLighter: FC<Props> = (props: Props) => {
   const { textToHighlight, keyWord = "" } = props;
-  console.log("SearchIngTextHighLighter.textToHighlight" + textToHighlight);
-  console.log("SearchIngTextHighLighter.keyWord: " + keyWord);
   const highLightColor = "#fd7e00";
   const tokens = textToHighlight.split(keyWord);
   const style = `linear-gradient( to bottom, ${highLightColor}, ${highLightColor})`;

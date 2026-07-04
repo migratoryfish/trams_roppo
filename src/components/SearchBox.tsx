@@ -39,15 +39,10 @@ const SearchBox: React.FC<Props> = ({ placeholder, sendKeyword, keyword }) => {
         }}
         onCompositionStart={() => {
           isImeOn.current = true; // IME 入力中フラグを ON
-          console.log("条文内検索　IME ON!!　で漢字入力開始です");
-        }}
-        onCompositionUpdate={() => {
-          console.log("条文内検索　IME ON中で入力中…");
         }}
         onCompositionEnd={() => {
           isImeOn.current = false; // IME 入力中フラグを OFF
           handleSearchInput((event?.target as HTMLInputElement).value); //入力が確定したとき
-          console.log("条文内検索　IME END!! 漢字変換が終了しました");
         }}
         // defaultValue={keyword}
         value={inputKeyWord}
