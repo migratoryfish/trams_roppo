@@ -87,13 +87,6 @@ const Articles = (props: Props) => {
       Number(firstItemMoreIndexRef.current) + Number(usersToMore);
 
     //末端データまで来たら読み込まない
-    console.log("original.current.length: " + original.current.length);
-    console.log(
-      "firstItemMoreIndexRef.current: " + firstItemMoreIndexRef.current
-    );
-    console.log("nextFirstItemMoreIndex: " + nextFirstItemMoreIndex);
-    console.log("START_INDEX: " + START_INDEX);
-
     //TODO:指定したページで初期化するとリスト末端まで描画してしまうためこのコードでreturn
     if (START_INDEX > 0) return;
     if (Number(firstItemMoreIndexRef.current) === original.current.length) {

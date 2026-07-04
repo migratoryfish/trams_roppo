@@ -11,11 +11,8 @@ type Props = {
   keyWord: string;
 };
 const ArticlePopUpBase: FC<Props> = ({ str, lawId, keyWord }) => {
-  console.log("ArticlePopUpBase.keyWord" + keyWord);
-  console.log("ReturnToken.lawId: " + lawId);
   const reg = new RegExp("(第.{1,5}条)");
   const splitedStr = str.split(reg);
-  console.log("splitedStr: " + splitedStr);
   let pg = [];
   for (let index = 0; index < splitedStr.length; index += 2) {
     if (index !== splitedStr.length - 1) {

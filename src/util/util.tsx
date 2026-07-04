@@ -88,7 +88,7 @@ export const getExamList = (
     case 8: //海事代理士試験
       break;
     default:
-      console.log("想定外な士業試験です:professionNumber: " + profession);
+      console.warn("想定外な士業試験です:professionNumber: " + profession);
       break;
   }
 };
@@ -106,7 +106,6 @@ export const findArticleData = (
   const lawNo = kanjiNumber2arabiaNumber(
     _lawNo.substring(1, _lawNo.length - 1)
   );
-  console.log("util.getArticleData.lawNo: " + lawNo);
 
   //TODO:効率のよい検索方法の実装 もしくはデータ構造
   let art;
@@ -116,7 +115,6 @@ export const findArticleData = (
       break;
     }
   }
-  console.log("util.getArticleData.art: " + art);
   return art;
 };
 
@@ -137,7 +135,6 @@ export const findArticleIndex = (
   }
   //先頭の条文番号を取得
   const lawNo = Number(lawNos[0]);
-  console.log("util.getArticleData.lawNo: " + lawNo);
 
   if (isNaN(lawNo)) {
     return -1;
@@ -150,8 +147,6 @@ export const findArticleIndex = (
       break;
     }
   }
-  console.log("util.getArticleIndex.articleIndex: " + articleIndex);
-
   //後半の条文番号があれば取得して加算する
   //TODO:"の"が存在しない条文が後に続いた場合意図した条文に飛ばない
   if (lawNos[1]) {

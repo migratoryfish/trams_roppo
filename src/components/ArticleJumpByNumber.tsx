@@ -38,19 +38,14 @@ const ArticleJumpByNumber = ({
 
   const handleNumButton = (event: React.MouseEvent<HTMLElement>) => {
     setArticleNumber(articleNumber + event.currentTarget.textContent);
-    console.log(
-      "ArticleJumpByNumber.handleButton: " + event.currentTarget.textContent
-    );
   };
   const handleJump = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
     sendJump(strarticleNumber);
-    console.log("ArticleJumpByNumber.handleJump");
   };
 
   const handleBack = (event: React.MouseEvent<HTMLElement>) => {
     setArticleNumber(articleNumber.slice(0, -1));
-    console.log("ArticleJumpByNumber.handleBack");
   };
 
   const _open = Boolean(anchorEl);
