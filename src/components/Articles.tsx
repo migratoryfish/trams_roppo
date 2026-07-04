@@ -11,8 +11,16 @@ import Article from "./Article";
 
 import InfiniteScroll from "react-infinite-scroller";
 import { Virtuoso } from "react-virtuoso";
+import type { LawArticle } from "../libs/lawTypes";
 
-const Articles = (props: any) => {
+type Props = {
+  articles: LawArticle[];
+  keyword: string;
+  lawId: string;
+  jumpIndex: string;
+};
+
+const Articles = (props: Props) => {
   //   const [list, setList] = useState<any[]>([]); //表示するデータ
   //   const [hasMore, setHasMore] = useState(true); //再読み込み判定
   //   const [isFetching, setIsFetching] = useState(false);
@@ -23,8 +31,7 @@ const Articles = (props: any) => {
 
   // const START_INDEX = 100;
 
-  // const ArticleStartIndex = getArticleIndex(props.lawId, props.jumpIndex);
-  const ArticleStartIndex = props.jumpIndex;
+  const ArticleStartIndex = Number(props.jumpIndex);
   const START_INDEX: number = !ArticleStartIndex
     ? 0
     : ArticleStartIndex >= props.articles.length
@@ -100,7 +107,7 @@ const Articles = (props: any) => {
     }
     return setTimeout(() => {
       setFirstItemMoreIndex(() => nextFirstItemMoreIndex);
-      setUsers((users: any) => {
+      setUsers((users) => {
         //苦肉の策 typescriptの空の型がうまく指定できないため
         users = users.length === INITIAL_ITEM_COUNT ? [] : users;
         return [

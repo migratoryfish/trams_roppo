@@ -59,8 +59,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
             variant="scrollable"
             scrollButtons="auto"
           >
-            {/* {examList?.map((law, index) => { */}
-            {examList?.map((law: any, index: number) => {
+            {examList?.map((law, index) => {
               return (
                 <Tab
                   key={law.lawId}
@@ -72,8 +71,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
           </TabList>
         </Box>
         <Box paddingTop={4} sx={{ height: "95vh" }}>
-          {/* {examList?.map((law, index) => { */}
-          {examList?.map((law: any, index: number) => {
+          {examList?.map((law, index) => {
             return (
               <LawTabPanel
                 key={law.lawId}

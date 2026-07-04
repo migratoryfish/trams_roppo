@@ -2,14 +2,21 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import Highlighter from "react-highlight-words";
 import BracketHighLighter from "./BracketHighLighter";
-const Item = (props: any) => {
+
+type Props = {
+  items: string[];
+  keyword?: string;
+  lawId: string;
+};
+
+const Item = (props: Props) => {
   return (
     <Typography component="div" paddingLeft={6}>
       {props.items
-        .map((item: any, index: number) => {
+        .map((item, index) => {
           return (index + 1).toString() + " " + item;
         })
-        .map((item: any, index: number) => {
+        .map((item, index) => {
           return (
             <React.Fragment key={index}>
               <BracketHighLighter
