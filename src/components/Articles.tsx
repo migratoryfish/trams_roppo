@@ -8,7 +8,6 @@ import React, {
 } from "react";
 //import InfiniteScroll from "react-infinite-scroll-component";
 import Article from "./Article";
-import { v4 as uuidv4 } from "uuid";
 
 import InfiniteScroll from "react-infinite-scroller";
 import { Virtuoso } from "react-virtuoso";
@@ -133,7 +132,7 @@ const Articles = (props: any) => {
       itemContent={(index, user) => {
         return (
           <Article
-            key={uuidv4()}
+            key={user.number}
             article={user}
             keyword={props.keyword}
             lawId={props.lawId}
