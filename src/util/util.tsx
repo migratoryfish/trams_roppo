@@ -14,6 +14,7 @@ import kyoutakuhoArticleData from "../datasource/kyoutakuho.json";
 import keihoArticleData from "../datasource/keiho.json";
 
 import examList from "../datasource/lawNameInfos.json";
+import type { LawArticle, LawData, LawNameInfo } from "../libs/lawTypes";
 
 // str: 日付文字列（yyyyMMdd）
 export function toDate(str: string): string {
@@ -28,8 +29,8 @@ export function toDate(str: string): string {
 }
 
 //TODO:将来的にモック対応
-export const getLawCode = (lawId: string) => {
-  let extArticleData;
+export const getLawCode = (lawId: string): LawData => {
+  let extArticleData: LawData;
   if (lawId === "129AC0000000089") {
     extArticleData = minpoArticleData;
   } else if (lawId === "321CONSTITUTION") {
@@ -61,7 +62,9 @@ export const getLawCode = (lawId: string) => {
   return extArticleData;
 };
 
-export const getExamList = (profession: number) => {
+export const getExamList = (
+  profession: number
+): LawNameInfo[] | undefined => {
   switch (profession) {
     case 0: //司法試験
       break;
@@ -92,7 +95,10 @@ export const getExamList = (profession: number) => {
 
 //条文データ(articles)から指定した条文番号の条文を探す純粋関数
 //データ取得はフック(useLawArticles)側で行い、この関数は検索のみを担当する
-export const findArticleData = (articles: any, _lawNo: string) => {
+export const findArticleData = (
+  articles: LawData | undefined,
+  _lawNo: string
+): LawArticle | undefined => {
   if (!articles?.lawDataArticles) {
     return undefined;
   }
@@ -116,7 +122,10 @@ export const findArticleData = (articles: any, _lawNo: string) => {
 
 //TODO:findArticleDataと統合
 //条文データ(articles)から指定した条文番号のインデックスを探す純粋関数
-export const findArticleIndex = (articles: any, _lawNo: string) => {
+export const findArticleIndex = (
+  articles: LawData | undefined,
+  _lawNo: string
+): number => {
   if (!articles?.lawDataArticles) {
     return -1;
   }

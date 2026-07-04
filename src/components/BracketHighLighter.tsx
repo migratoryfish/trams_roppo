@@ -7,7 +7,7 @@ import { BracketHighLightContext } from "../libs/SettingContext";
 type Props = {
   bracketToHighlight: string;
   lawId: string;
-  keyWord: string;
+  keyWord?: string;
 };
 
 type BracketHighLSet = {
