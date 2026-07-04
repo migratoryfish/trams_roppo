@@ -4,7 +4,6 @@ import { LinearGradient } from "react-text-gradients";
 import PopUp from "./PopUp";
 import { useContext } from "react";
 import { PopUpArticleContext } from "../libs/SettingContext";
-import Highlighter from "react-highlight-words";
 import SearchIngTextHighLighter from "./SearchIngTextHighLighter";
 type Props = {
   str: string;

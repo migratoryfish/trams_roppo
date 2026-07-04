@@ -6,10 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-//import InfiniteScroll from "react-infinite-scroll-component";
 import Article from "./Article";
-
-import InfiniteScroll from "react-infinite-scroller";
 import { Virtuoso } from "react-virtuoso";
 import type { LawArticle } from "../libs/lawTypes";
 
