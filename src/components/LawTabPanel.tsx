@@ -69,9 +69,9 @@ const LawTabPanel: FC<Props> = ({ targetArticlesID, value }) => {
 
   //TODO:keywordが空ならそもそもこのループを走らせないこと
   //TODO:号配下の文字列も検索対象にするか? 処理速度との絡み
-  let data = extArticleData.lawDataArticles?.flatMap((article: any) =>
+  let data = extArticleData.lawDataArticles?.flatMap((article) =>
     article.paragraphs.some(
-      (paragraph: any) =>
+      (paragraph) =>
         //!keyword ? true : paragraph.sentence.search(`/${keyword}/g`)
         //someではなく処理速度的にfindのほうがよいか?
         //ToDo:要検討

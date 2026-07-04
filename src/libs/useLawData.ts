@@ -2,6 +2,7 @@ import useSWR from "swr";
 import axios from "axios";
 import { getExamList, getLawCode } from "../util/util";
 import { examScopeOfProsKey } from "./examScopeOfProsKey";
+import type { LawData, LawNameInfo } from "./lawTypes";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -18,7 +19,7 @@ const swrOptions = {
 //開発モードでは key に null を渡してフェッチを無効化する(SWRの条件付きフェッチ)
 export const useExamList = (professionExam: number) => {
   const exam = examScopeOfProsKey[professionExam];
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading } = useSWR<LawNameInfo[]>(
     isProduction
       ? `https://tr-rest-api.vercel.app/api/examScopeOfPro/${exam}`
       : null,
@@ -40,7 +41,7 @@ export const useExamList = (professionExam: number) => {
 //法令の全条文データを取得するフック
 //開発モードではローカルJSON、本番モードではREST APIから取得する
 export const useLawArticles = (lawId: string) => {
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading } = useSWR<LawData[]>(
     isProduction
       ? `https://tr-rest-api.vercel.app/api/lawArticles3/${lawId}`
       : null,
