@@ -8,7 +8,8 @@ import {
 } from "@mui/material";
 import { Backspace, ReplyAll } from "@mui/icons-material";
 import { useState } from "react";
-import { getArticleIndex } from "../util/util";
+import { findArticleIndex } from "../util/util";
+import { useLawArticles } from "../libs/useLawData";
 
 export type ArticleJumpByNumberProps = {
   open: boolean;
@@ -26,7 +27,9 @@ const ArticleJumpByNumber = ({
   //Popperテストコード
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [articleNumber, setArticleNumber] = useState<string>("");
-  const strarticleNumber = getArticleIndex(lawId, articleNumber).toString();
+  //フックでデータを取得し、検索は純粋関数(findArticleIndex)で行う
+  const { articles } = useLawArticles(lawId);
+  const strarticleNumber = findArticleIndex(articles, articleNumber).toString();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setArticleNumber("");
@@ -41,8 +44,6 @@ const ArticleJumpByNumber = ({
   };
   const handleJump = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    // const strarticleNumber = getArticleIndex(lawId, articleNumber).toString(); //中でuseSWRフック呼び出し/フックルール違反
-    // sendJump(articleNumber);
     sendJump(strarticleNumber);
     console.log("ArticleJumpByNumber.handleJump");
   };

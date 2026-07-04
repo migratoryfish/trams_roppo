@@ -14,10 +14,6 @@ import kyoutakuhoArticleData from "../datasource/kyoutakuho.json";
 import keihoArticleData from "../datasource/keiho.json";
 
 import examList from "../datasource/lawNameInfos.json";
-import axios from "axios";
-import useSWR from "swr";
-
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 // str: 日付文字列（yyyyMMdd）
 export function toDate(str: string): string {
@@ -65,16 +61,6 @@ export const getLawCode = (lawId: string) => {
   return extArticleData;
 };
 
-// export const getLawCode2 = (lawId: string) = {
-//   const { data, error, isLoading } = useSWR(
-//     `https://tr-rest-api.vercel.app/api/examScopeOfPro/${exam}`,
-//     fetcher
-//   );
-//   if (error) {
-//     console.log("error!: " + error);
-//   }
-// }
-
 export const getExamList = (profession: number) => {
   switch (profession) {
     case 0: //司法試験
@@ -104,32 +90,11 @@ export const getExamList = (profession: number) => {
   }
 };
 
-export const getArticleData = (lawId: string, _lawNo: string) => {
-  // const articles = getLawCode(lawId);
-  let articles;
-  if (import.meta.env.MODE === "development") {
-    articles = getLawCode(lawId);
-  } else if (import.meta.env.MODE === "production") {
-    console.log("production.LawTabPanel.targetArticlesID" + lawId);
-    const { data, error, isLoading } = useSWR(
-      `https://tr-rest-api.vercel.app/api/lawArticles3/${lawId}`,
-      fetcher,
-      {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-      }
-    );
-    if (error) {
-      console.log("error!: " + error);
-      return {};
-    }
-    if (isLoading) {
-      console.log("isLoading!: " + isLoading);
-      return {};
-    }
-
-    articles = data[0];
+//条文データ(articles)から指定した条文番号の条文を探す純粋関数
+//データ取得はフック(useLawArticles)側で行い、この関数は検索のみを担当する
+export const findArticleData = (articles: any, _lawNo: string) => {
+  if (!articles?.lawDataArticles) {
+    return undefined;
   }
 
   const lawNo = kanjiNumber2arabiaNumber(
@@ -149,32 +114,11 @@ export const getArticleData = (lawId: string, _lawNo: string) => {
   return art;
 };
 
-//TODO:getArticleDataと統合
-export const getArticleIndex = (lawId: string, _lawNo: string) => {
-  // const articles = getLawCode(lawId);
-  let articles;
-  if (import.meta.env.MODE === "development") {
-    articles = getLawCode(lawId);
-  } else if (import.meta.env.MODE === "production") {
-    const { data, error, isLoading } = useSWR(
-      `https://tr-rest-api.vercel.app/api/lawArticles3/${lawId}`,
-      fetcher,
-      {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-      }
-    );
-    if (error) {
-      console.log("error!: " + error);
-      return 0;
-    }
-    if (isLoading) {
-      console.log("isLoading!: " + isLoading);
-      return 0;
-    }
-
-    articles = data[0];
+//TODO:findArticleDataと統合
+//条文データ(articles)から指定した条文番号のインデックスを探す純粋関数
+export const findArticleIndex = (articles: any, _lawNo: string) => {
+  if (!articles?.lawDataArticles) {
+    return -1;
   }
 
   const lawNos = _lawNo.split("の");
