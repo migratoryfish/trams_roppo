@@ -1,6 +1,5 @@
 import Typography from "@mui/material/Typography";
 import React from "react";
-import Highlighter from "react-highlight-words";
 import BracketHighLighter from "./BracketHighLighter";
 
 type Props = {

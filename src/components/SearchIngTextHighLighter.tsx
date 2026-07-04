@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { FC } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   textToHighlight: string;
@@ -68,7 +67,6 @@ const SearchIngTextHighLighter: FC<Props> = (props: Props) => {
   //       {textToHighlight}
   //     </Box>
   //   );
-  //key={uuidv4()}
 };
 
 export default SearchIngTextHighLighter;
