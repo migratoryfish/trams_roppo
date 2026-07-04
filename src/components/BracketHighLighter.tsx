@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import { FC } from "react";
 import TextHighLighter from "./TextHighLighter";
-import { v4 as uuidv4 } from "uuid";
 import { useContext } from "react";
 import { BracketHighLightContext } from "../libs/SettingContext";
 
@@ -91,10 +90,10 @@ const BracketHighLighter: FC<Props> = ({
 
   return (
     <Box component="span">
-      {bracketLevelStack.map((token) => {
+      {bracketLevelStack.map((token, index) => {
         return (
           <TextHighLighter
-            key={uuidv4()}
+            key={index}
             textToHighlight={token.token}
             level={token.level}
             lawId={lawId}

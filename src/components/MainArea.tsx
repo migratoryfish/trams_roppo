@@ -35,7 +35,6 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
 import { BracketHighLightContext } from "../libs/SettingContext";
 import { PopUpArticleContext } from "../libs/SettingContext";
 
@@ -328,7 +327,7 @@ export default function MainArea() {
           {useMemo(
             () => (
               <LawTabs
-                key={uuidv4()}
+                key={professionExam}
                 keyword={keyword}
                 professionExam={professionExam}
               />

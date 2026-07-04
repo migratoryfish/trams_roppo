@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import { FC, ReactNode } from "react";
 import LawTabPanel from "./LawTabPanel";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { v4 as uuidv4 } from "uuid";
 import { useExamList } from "../libs/useLawData";
 
 type Props = {
@@ -64,7 +63,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
             {examList?.map((law: any, index: number) => {
               return (
                 <Tab
-                  key={uuidv4()}
+                  key={law.lawId}
                   label={law.lawName}
                   value={index.toString()}
                 />
@@ -77,7 +76,7 @@ const LawTabs: FC<Props> = ({ keyword, children, professionExam }) => {
           {examList?.map((law: any, index: number) => {
             return (
               <LawTabPanel
-                key={uuidv4()}
+                key={law.lawId}
                 targetArticlesID={law.lawId}
                 value={index.toString()}
               />
