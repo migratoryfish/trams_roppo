@@ -1,0 +1,37 @@
+# CI: push または Pull Request のたびに lint・型チェック・テスト・ビルドを自動実行する
+name: CI
+
+on:
+  push:
+    branches: [main, develop, "feature/**"]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      # リポジトリを取得
+      - uses: actions/checkout@v4
+
+      # Node.js をセットアップ (npmのキャッシュ付きで2回目以降は高速)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 依存パッケージをインストール (package-lock.jsonに従い再現性を保つ)
+      - name: Install dependencies
+        run: npm ci
+
+      # ESLint (フックのルール違反などを検出)
+      - name: Lint
+        run: npm run lint
+
+      # テスト (漢数字変換など)
+      - name: Test
+        run: npx vitest run
+
+      # 型チェック + 本番ビルドが通ることを確認
+      - name: Build
+        run: npm run build
